@@ -21,7 +21,15 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'avatar',
+        'address'
     ];
+    public function checkout()
+    {
+        return $this->belongsTo(Checkout::class, 'user_id');
+    }
+    
 
     /**
      * The attributes that should be hidden for serialization.
