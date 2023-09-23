@@ -98,36 +98,42 @@
                                             <x-input-label for="name" :value="__('Name')" /><br>
                                             <x-text-input id="name" class="block mt-1 w-full w-100" type="text"
                                                 name="name" :value="old('name')" required autofocus
-                                                autocomplete="name" style="border-radius:5px; height:40px; " />
+                                                autocomplete="name" style="border-radius:5px; height:35px; " />
                                             <x-input-error :messages="$errors->get('name')" class="mt-2" style="color: red; background-color:#ffe6e6"  />
                                         </div>
 
                                         <!-- Email Address -->
-                                        <div class="mt-4" style="font-weight: bold">
+                                        <div style="font-weight: bold">
                                             <x-input-label for="email" :value="__('Email')" /><br>
                                             <x-text-input id="email" class="block mt-1 w-full w-100" type="email"
-                                                name="email" :value="old('email')" required autocomplete="username" style="border-radius:5px; height:40px; " />
+                                                name="email" :value="old('email')" required autocomplete="username" style="border-radius:5px; height:35px; " />
                                             <x-input-error :messages="$errors->get('email')" class="mt-2" style="color: red; background-color:#ffe6e6"  />
                                         </div>
-                                       
+                                        <!-- phone -->
+                                        <div style="font-weight: bold">
+                                            <x-input-label for="phone" :value="__('phone')" /><br>
+                                            <x-text-input id="phone" class="block mt-1 w-full w-100" type="phone"
+                                                name="phone" :value="old('phone')" required autocomplete="username" style="border-radius:5px; height:35px; " />
+                                            <x-input-error :messages="$errors->get('phone')" class="mt-2" style="color: red; background-color:#ffe6e6"  />
+                                        </div>
 
                                         <!-- Password -->
-                                        <div style="font-weight: bold" class="mt-4">
+                                        <div style="font-weight: bold">
                                             <x-input-label for="password" :value="__('Password')" /><br>
 
                                             <x-text-input id="password" class="block mt-1 w-full w-100" type="password"
-                                                name="password" required autocomplete="new-password" style="border-radius:5px; height:40px; "  />
+                                                name="password" required autocomplete="new-password" style="border-radius:5px; height:35px; "  />
 
                                             <x-input-error :messages="$errors->get('password')" class="mt-2" style="color: red; background-color:#ffe6e6"  />
                                         </div>
 
                                         <!-- Confirm Password -->
-                                        <div class="mt-4" style="font-weight: bold">
+                                        <div style="font-weight: bold">
                                             <x-input-label for="password_confirmation" :value="__('Confirm Password')" /><br>
 
                                             <x-text-input id="password_confirmation" class="block mt-1 w-full w-100"
                                                 type="password" name="password_confirmation" required
-                                                autocomplete="new-password" style="border-radius:5px; height:40px; " />
+                                                autocomplete="new-password" style="border-radius:5px; height:35px; " />
 
                                             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" style="color: red; background-color:#ffe6e6"  />
                                         </div><br>

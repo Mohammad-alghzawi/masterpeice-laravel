@@ -1,9 +1,20 @@
+
 <x-app-layout>
-    <x-slot name="header">
+    <div class="hero overlay" style="  background-image: url('{{ asset('assets/img/login - Copy11.jpg') }}'); height: 300px; background-size: cover; background-repeat: no-repeat;" >
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <h1 class="heading mt-6 mb-2" style="margin-top:0px; font-weight: bolder;font-size:50px; color:white" data-aos="fade-up">Your Profile</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Profile') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
@@ -27,3 +38,4 @@
         </div>
     </div>
 </x-app-layout>
+
