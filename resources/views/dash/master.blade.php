@@ -744,10 +744,11 @@
                                     </li>
 
                                     <li>
-                                        <button data-bs-toggle="tab" data-bs-target="#tab_profile" type="button"
+                                        {{-- <button data-bs-toggle="tab" data-bs-target="#tab_profile" type="button"
                                             role="tab" aria-selected="false">
                                             Profile
-                                        </button>
+                                        </button> --}}
+                                        <a href="{{route('profile.index')}}">Profile</a>
                                     </li>
                                     
                                     <li>

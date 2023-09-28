@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashController;
+use App\Http\Controllers\ProfileDashController;
 
 
 
@@ -44,6 +45,7 @@ Route::resource('/product',ProductController::class);
 Route::resource('/users',UserController::class);
 Route::resource('/admin',AdminController::class);
 Route::resource('/dash',DashController::class);
+Route::resource('/profile',ProfileDashController::class);
 
 
 
