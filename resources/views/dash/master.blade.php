@@ -42,6 +42,11 @@
     <!-- Include stylesheet CSS -->
     <link rel="stylesheet" href={{ asset('assets/css/style.css') }}>
 
+
+
+
+
+
 </head>
 
 <body>
@@ -55,7 +60,7 @@
         </div>
         <!-- back-to-top end -->
 
-        <!-- header section start -->
+        {{-- <!-- header section start -->
         <header class="header_section header_1">
          
 
@@ -561,7 +566,7 @@
                 </div>
                 <!-- collapse search - end -->
             </div>
-        </header>
+        </header> --}}
 
         <!-- main body start -->
         <main>
@@ -581,7 +586,8 @@
                                     <div class="prdc_ctg_product_content mt-1 d-flex align-items-center">
                                         <div
                                             class="prdc_ctg_product_img d-flex justify-content-center align-items-center me-3">
-                                            <img src="assets/images/category/cat6.png" alt="image_not_found">
+                                            <img src={{ asset('assets/images/category/cat6.png') }}
+                                                alt="image_not_found">
                                         </div>
                                         <div class="prdc_ctg_product_text">
                                             <div class="prdc_ctg_product_title my-2">
@@ -596,7 +602,8 @@
                                     <div class="prdc_ctg_product_content mt-1 d-flex align-items-center">
                                         <div
                                             class="prdc_ctg_product_img d-flex justify-content-center align-items-center me-3">
-                                            <img src="assets/images/category/cat7.png" alt="image_not_found">
+                                            <img src={{ asset('assets/images/category/cat7.png') }}
+                                                alt="image_not_found">
                                         </div>
                                         <div class="prdc_ctg_product_text">
                                             <div class="prdc_ctg_product_title my-2">
@@ -611,7 +618,8 @@
                                     <div class="prdc_ctg_product_content mt-1 d-flex align-items-center">
                                         <div
                                             class="prdc_ctg_product_img d-flex justify-content-center align-items-center me-3">
-                                            <img src="assets/images/category/cat8.png" alt="image_not_found">
+                                            <img src={{ asset('assets/images/category/cat8.png') }}
+                                                alt="image_not_found">
                                         </div>
                                         <div class="prdc_ctg_product_text">
                                             <div class="prdc_ctg_product_title my-2">
@@ -660,7 +668,7 @@
             <!-- Breadcrumb section start -->
             <section class="breadcrumb_sec_1 position-relative">
                 <div class="breadcrumb_wrap sec_space_mid_small"
-                    style="background-image: url(assets/images/breadcrumb/breadcrumb1.png);">
+                    style="background-image: url('{{ asset('assets/images/breadcrumb/breadcrumb1.png') }}');">
                     <div class="breadcrumb_cont text-center">
                         <div class="breadcrumb_title">
                             <h2 class="text-white text-uppercase">Dashboard</h2>
@@ -686,79 +694,87 @@
                                     <div class="vd_info_wrap text-center">
                                         <div class="vd_image">
                                             <div class="image_wrap">
-                                                <img src="assets/images/meta/meta1.png" alt="image_not_found">
+                                                <img src={{ asset('assets/images/meta/meta1.png') }}
+                                                    alt="image_not_found">
                                             </div>
-                                            <button type="button" class="edit_btn">
-                                                <i class="fas fa-camera-retro"></i>
-                                            </button>
+                                           
                                         </div>
                                         <h2 class="vd_mane">Vicent George</h2>
                                         <span class="vd_mail"><a href="#!">vicentgeorg@gmail.com</a></span>
-                                        <ul class="vd_meta ul_li_center">
-                                            <li><span>750</span> Followers</li>
-                                            <li><span>10</span> Review</li>
-                                        </ul>
+                                      
                                     </div>
                                 </div>
 
                                 <ul class="vd_tab_nav nav ul_li_block" role="tablist">
                                     <li>
-                                        <button class="active" data-bs-toggle="tab" data-bs-target="#tab_dashboard"
+                                        {{-- <button data-bs-toggle="tab" data-bs-target="#tab_dashboard"
                                             type="button" role="tab" aria-selected="true">
                                             Dashboard
-                                        </button>
+                                        </button> --}}
+                                        <a href="{{route('dash.index')}}">Dashboard</a>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <button data-bs-toggle="tab" data-bs-target="#tab_products" type="button"
                                             role="tab" aria-selected="false">
                                             Products
                                         </button>
+                                    </li> --}}
+
+                                    <li>
+                                        {{-- <button data-bs-toggle="tab" data-bs-target="#tab_categories" type="button"
+                                            role="tab" aria-selected="false">
+                                            categories
+                                        </button> --}}
+                                        <a href="{{route('category.index')}}">Category</a>
                                     </li>
                                     <li>
-                                        <button data-bs-toggle="tab" data-bs-target="#tab_orders" type="button"
+                                        {{-- <button data-bs-toggle="tab" data-bs-target="#tab_orders" type="button"
                                             role="tab" aria-selected="false">
                                             Orders
-                                        </button>
+                                        </button> --}}
+                                        <a href="{{route('product.index')}}">Product</a>
                                     </li>
+                                    <li>
+                                        
+                                        <a href="{{route('users.index')}}">Users</a>
+                                    </li>
+                                    <li>
+                                        
+                                        <a href="{{route('admin.index')}}">Admins</a>
+                                    </li>
+
                                     <li>
                                         <button data-bs-toggle="tab" data-bs-target="#tab_profile" type="button"
                                             role="tab" aria-selected="false">
                                             Profile
                                         </button>
                                     </li>
-                                    <li>
-                                        <button data-bs-toggle="tab" data-bs-target="#tab_settings" type="button"
-                                            role="tab" aria-selected="false">
-                                            Settings
-                                        </button>
-                                    </li>
+                                    
                                     <li>
                                         <a href="#">Logout</a>
                                     </li>
                                 </ul>
 
-                                <div class="vd_space">
-                                    <ul class="vd_btns_group ul_li_block">
-                                        <li>
-                                            <a class="btn custom_btn" href="#!">Need Help?</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                               
                             </div>
                         </div>
 
 
 
 
-                        @yield('content')
+                        
+                        <div class="col col-lg-9">
+                            <div class="tab-content">
+
+
+                                @yield('content')
 
 
 
 
 
-
-
-
+                            </div>
+                        </div>
                         <!-- Include jquery js -->
                         <script src={{ asset('assets/js/jquery.min.js') }}></script>
 

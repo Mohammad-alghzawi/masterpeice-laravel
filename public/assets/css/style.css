@@ -410,7 +410,7 @@ p {
           animation-delay: 2.1s;
 }
 
-@-webkit-keyframes "text-effect" {
+@-webkit-keyframes text-effect {
   10% {
     opacity: 0.5;
   }
@@ -435,7 +435,7 @@ p {
   }
 }
 
-@keyframes "text-effect" {
+@keyframes text-effect {
   10% {
     opacity: 0.5;
   }
@@ -586,19 +586,19 @@ p {
   font-weight: 600;
   line-height: 55px;
   text-align: center;
-  background-color: #81c408;
+  /* background-color: #81c408; */
   text-transform: uppercase;
   border: 2px solid transparent;
   -webkit-transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
-.btns_group a:hover {
+/* .btns_group a:hover {
   color: #000000;
   background-color: #ffffff;
   border: 2px solid #81c408;
   -webkit-transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
+} */
 
 .btn_coupon {
   background-color: #7cc000;

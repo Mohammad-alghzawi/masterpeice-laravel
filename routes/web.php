@@ -1,7 +1,16 @@
 <?php
 
+
+
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryContoller;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DashController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.shop');
-});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -29,3 +36,15 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+//-----------DASHBOARD---------
+Route::resource('/category',CategoryContoller::class);
+Route::resource('/product',ProductController::class);
+Route::resource('/users',UserController::class);
+Route::resource('/admin',AdminController::class);
+Route::resource('/dash',DashController::class);
+
+
+
+

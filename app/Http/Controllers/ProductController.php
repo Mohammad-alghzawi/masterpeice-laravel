@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -14,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products=Product::all();
+        return view('dash.Product.index', compact('products'));
     }
 
     /**
@@ -24,7 +26,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories=Category::all();
+       
+        return view('dash.Product.create',compact('categories'));
     }
 
     /**
@@ -34,9 +38,28 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    $product = new Product;
+
+        $product->product_name = $request->product_name;
+        $product->product_description = $request->product_description;
+        $product->product_price = $request->product_price;
+        $product->product_quantity = $request->product_quantity;
+        $product->product_status = $request->product_status;
+        $product->category_id = $request->categories;
+
+        if ($request->hasFile('product_image')) {
+            $image = $request->file('product_image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName); // Upload the image to the public/images directory
+            $product->product_image = $imageName;
+        }
+
+        $product->save();
+        // return redirect('dash.home', compact('categories'));
+        return redirect()->route('product.index')->with('status','Add product successfully');
+}
+
 
     /**
      * Display the specified resource.
@@ -55,10 +78,14 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
-    {
-        //
-    }
+    public function edit($id)
+{
+    $data = Product::find($id);
+    $categories = Category::all();
+    
+    return view('dash.Product.edit', compact('data', 'categories'));
+}
+
 
     /**
      * Update the specified resource in storage.
@@ -69,7 +96,20 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $input = $request->all();
+
+        if ($product_image = $request->file('product_image')) {
+            $destinationPath = 'images/';
+            $profileImage = date('YmdHis') . "." . $product_image->getClientOriginalExtension();
+            $product_image->move($destinationPath, $profileImage);
+            $input['product_image'] = "$profileImage";
+        }else{
+            $input['product_image']= $product->product_image;
+        }
+
+        $product->update($input);
+        // return redirect('dash.home', compact('categories'));
+        return redirect()->route('product.index')->with('status','Edit product successfully');
     }
 
     /**
@@ -78,8 +118,9 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        Product::destroy($id);
+        return redirect()->route('product.index')->with('status','Delete product successfully');
     }
 }

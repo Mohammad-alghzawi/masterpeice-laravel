@@ -123,6 +123,7 @@
         </div>
 
         <div class="row">
+
             <div class="col-lg-4 col-md-6 text-center">
                 <div class="single-product-item">
                     <div class="product-image">
@@ -133,6 +134,7 @@
                     <a href="shop.html" class="cart-btn"> Agriculture materials</a>
                 </div>
             </div>
+            
             <div class="col-lg-4 col-md-6 text-center">
                 <div class="single-product-item">
                     <div class="product-image">
