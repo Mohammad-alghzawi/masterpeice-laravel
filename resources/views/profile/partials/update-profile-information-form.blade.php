@@ -1,3 +1,57 @@
+<section style="position:relative ; left:80% ; bottom :20px">
+    <br>
+            <h2 class="text-2xl font-medium text-gray-900 " style="display: inline-block">
+                {{ __('') }}
+            </h2>
+    
+      
+        <x-primary-button style="background-color: #051922;"
+        x-data=""
+        x-on:click.prevent="$dispatch('open-modal', 'change-password')"
+    >{{ __('Change Password') }}</x-primary-button>
+    
+    <x-modal name="change-password" :show="$errors->changePassword->isNotEmpty()" focusable>
+        <form method="post" action="{{ route('password.update') }}" style="padding: 15px">
+            @csrf
+            @method('put')
+            <p class="mt-1 text-sm text-gray-600">
+                {{ __('Ensure your account is using a long, random password to stay secure.') }}
+            </p>
+            <div>
+                <x-input-label for="current_password" :value="__('Current Password')" />
+                <x-text-input id="current_password" name="current_password" type="password" class="mt-1 block w-full"  autocomplete="current-password" />
+                <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+            </div>
+    
+            <div>
+                <x-input-label for="password" :value="__('New Password')" />
+                <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
+                <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+            </div>
+    
+            <div>
+                <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                <x-text-input id="password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
+                <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
+            </div>
+    
+            <div class="flex items-center gap-4 py-3" >
+                <x-primary-button >{{ __('Save') }}</x-primary-button>
+    
+                @if (session('status') === 'password-updated')
+                    <p
+                        x-data="{ show: true }"
+                        x-show="show"
+                        x-transition
+                        x-init="setTimeout(() => show = false, 2000)"
+                        class="text-sm text-gray-600"
+                    >{{ __('Saved.') }}</p>
+                @endif
+            </div>
+        </form>
+    </x-modal>
+    </section>
+
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -5,7 +59,7 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("Update your account's profile information.") }}
         </p>
     </header>
 
@@ -13,42 +67,41 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
         <div class="row">
             <div class="col-md-4 col-12">
-                @if ($user->name)
-                    <img src="{{ asset('assets/img/'.$user->avatar) }}" alt="{{ $user->name }}'s Profile Picture"
-                        class="img-fluid" style="max-width: 200px; height: auto;">
+                @if ($user->avatar)
+                <a href="#"><img src="{{ url('images/'. $user->avatar) }}" width="100px"
+                    height="100px" alt="Avatar"></a>
                 @else
-                    <img src="{{ asset('assets/img/cart1.jpg') }}" alt="Default Profile Picture"
+                    <img src="{{ asset('assets/img/default-avatar-profile-icon-of-social-media-user-in-clipart-style-vector.jpg') }}" alt="Default Profile Picture"
                         class="img-fluid" style="max-width: 200px; height: auto;">
                 @endif
 
                 <div class="form-group mt-3">
-                    <label for="image">{{ __('Upload new image') }}</label>
-                    <input id="image" name="image" type="file" accept="image/*" class="form-control-file"
-                        :value="old('avatar', $user - > avatar)" autocomplete="image" />
+                    <label for="avatar">{{ __('Upload new image') }}</label>
+                    <input id="avatar" name="avatar" type="file" accept="image/*" class="form-control-file" :value="old('image', $user->image)" autocomplete="image" />
                     <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
                 </div>
             </div>
             <div class="col-md-7 col-12">
-                <div>
+                <div >
                     <x-input-label for="name" :value="__('Name')" />
                     <x-text-input id="name" name="name" type="text" class="mt-1 block w-full"
                         :value="old('name', $user->name)" required autofocus autocomplete="name" />
                     <x-input-error class="mt-2" :messages="$errors->get('name')" />
                 </div>
 
-                <div>
-                    <x-input-label for="phone" :value="__('phone')" />
-                    <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full"
+                <div >
+                    <x-input-label  for="phone" :value="__('phone')" />
+                    <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full "
                         :value="old('phone', $user->phone)" required autofocus autocomplete="phone" />
                     <x-input-error class="mt-2" :messages="$errors->get('phone')" />
                 </div>
 
-                <div>
+                <div >
                     <x-input-label for="email" :value="__('Email')" />
                     <x-text-input id="email" name="email" type="email" class="mt-1 block w-full"
                         :value="old('email', $user->email)" required autocomplete="username" />
@@ -73,10 +126,10 @@
                         </div>
                     @endif
                 </div>
-            </div>
+            
 
 
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-4 mt-4" >
                 <x-primary-button>{{ __('Save') }}</x-primary-button>
 
                 @if (session('status') === 'profile-updated')
@@ -85,12 +138,15 @@
                 @endif
             </div>
         </div>
+    </div>
     </form>
 
 </section>
 
-<section>
-    <x-primary-button x-data=""
+{{-- <section>
+    <x-primary-button style="margin-left:350px"
+
+    x-data=""
         x-on:click.prevent="$dispatch('open-modal', 'Update password')">{{ __('Update password') }}</x-primary-button>
 
     <x-modal name="Update password" :show="$errors->userDeletion->isNotEmpty()" focusable>
@@ -139,4 +195,4 @@
             </div>
         </form>
     </x-modal>
-</section>
+</section> --}}

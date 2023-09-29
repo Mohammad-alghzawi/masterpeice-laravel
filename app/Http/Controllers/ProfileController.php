@@ -34,17 +34,20 @@ class ProfileController extends Controller
         $user->fill($request->only(['name', 'email']));
 
         // Check if the user uploaded a new image
+       
         if ($request->hasFile('avatar')) {
-            // Validate and store the uploaded image
-            $image = $request->file('avatar');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('assets/img/'), $imageName);
+            $file = $request->file('avatar');
+            $extenstion = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extenstion;
+            $file->move('images', $filename);
+            $user->avatar = $filename;
+        }
             
 
 
             // $imagePath = $request->file('image')->store('images/users');
-            $user->avatar =  $imageName;
-        }
+            
+        
 
         // Update the user's phone number
         $user->phone = $request->input('phone');

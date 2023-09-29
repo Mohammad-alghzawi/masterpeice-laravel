@@ -5,8 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="col col-lg-9">
-        <div class="tab-content">
+    
             <div class="tab-pane fade show active" id="tab_dashboard" role="tabpanel">
                 <div class="row">
                     <div class="col col-lg-4">
@@ -69,6 +68,5 @@
 
          
         
-        </div>
-    </div>
+      
 @endsection

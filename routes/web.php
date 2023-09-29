@@ -2,6 +2,7 @@
 
 
 
+use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryContoller;
@@ -10,6 +11,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashController;
 use App\Http\Controllers\ProfileDashController;
+use App\Http\Controllers\LoginDashController;
+
+
+
 
 
 
@@ -46,6 +51,8 @@ Route::resource('/users',UserController::class);
 Route::resource('/admin',AdminController::class);
 Route::resource('/dash',DashController::class);
 Route::resource('/profileAdmin',ProfileDashController::class);
+Route::resource('/loginDash',LoginDashController::class);
+
 
 
 

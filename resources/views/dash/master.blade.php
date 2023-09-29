@@ -708,11 +708,9 @@
 
                                 <ul class="vd_tab_nav nav ul_li_block" role="tablist">
                                     <li>
-                                        {{-- <button data-bs-toggle="tab" data-bs-target="#tab_dashboard"
-                                            type="button" role="tab" aria-selected="true">
-                                            Dashboard
-                                        </button> --}}
-                                        <a href="{{route('dash.index')}}">Dashboard</a>
+                                        <button class="{{ request()->is('dash*') ? 'active' : '' }}" >
+                                            <a href="{{route('dash.index')}}" style="color: rgb(25, 24, 24) ;">Dashboard</a>
+                                        </button>
                                     </li>
                                     {{-- <li>
                                         <button data-bs-toggle="tab" data-bs-target="#tab_products" type="button"
@@ -726,22 +724,32 @@
                                             role="tab" aria-selected="false">
                                             categories
                                         </button> --}}
-                                        <a href="{{route('category.index')}}">Category</a>
+                                        <button class="{{ request()->is('category*') ? 'active' : '' }}" >
+                                            <a href="{{route('category.index')}}"style="color: rgb(25, 24, 24) ;">Category</a>
+                                        </button>
+                                        
                                     </li>
                                     <li>
                                         {{-- <button data-bs-toggle="tab" data-bs-target="#tab_orders" type="button"
                                             role="tab" aria-selected="false">
                                             Orders
                                         </button> --}}
-                                        <a href="{{route('product.index')}}">Product</a>
+                                        <button class="{{ request()->is('product*') ? 'active' : '' }}" >
+                                            <a href="{{route('product.index')}}"style="color: rgb(25, 24, 24) ;">Product</a>
+                                        </button>
+                                        
                                     </li>
                                     <li>
-                                        
-                                        <a href="{{route('users.index')}}">Users</a>
+                                        <button class="{{ request()->is('users*') ? 'active' : '' }}" >
+                                            <a href="{{route('users.index')}}"style="color: rgb(25, 24, 24) ;">User</a>
+                                        </button>
+                                      
                                     </li>
                                     <li>
-                                        
-                                        <a href="{{route('admin.index')}}">Admins</a>
+                                        <button class="{{ request()->is('admin*') ? 'active' : '' }}" >
+                                            <a href="{{route('admin.index')}}"style="color: rgb(25, 24, 24) ;">Admin</a>
+                                        </button>
+                                       
                                     </li>
 
                                     <li>
@@ -749,7 +757,10 @@
                                             role="tab" aria-selected="false">
                                             Profile
                                         </button> --}}
-                                        <a href="{{route('profileAdmin.index')}}">Profile</a>
+                                        <button class="{{ request()->is('profileAdmin*') ? 'active' : '' }}" >
+                                            <a href="{{route('profileAdmin.index')}}"style="color: rgb(25, 24, 24) ;">Profile</a>
+                                        </button>
+                                        
                                     </li>
                                     
                                     <li>
