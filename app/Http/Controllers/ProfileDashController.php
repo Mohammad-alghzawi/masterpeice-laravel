@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Admin;
 
 class ProfileDashController extends Controller
 {
@@ -13,7 +14,8 @@ class ProfileDashController extends Controller
      */
     public function index()
     {
-        return view('dash.profile.index');
+        $profiledash = Admin::all();
+        return view('dash.profile.index', compact('profiledash'));
     }
 
     /**
@@ -56,7 +58,8 @@ class ProfileDashController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Admin::find($id);
+        return view('dash.profile.edit')->with('data', $data);
     }
 
     /**
@@ -68,7 +71,28 @@ class ProfileDashController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $profile = Admin::find($id);
+
+        // Update profile attributes based on form data
+        $profile->name = $request->input('name');
+        $profile->email = $request->input('email');
+        $profile->phone = $request->input('phone');
+        $profile->password = $request->input('password');
+
+
+        // Handle image upload if a new image is provided
+        if ($request->hasFile('avatar')) {
+            $image = $request->file('avatar');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName); // Upload the image to the public/images directory
+            $profile->avatar = $imageName;
+        }
+
+        // Save the updated profile
+        $profile->save();
+
+        // Redirect back to the category index or wherever you want
+        return redirect()->route('profileAdmin.index')->with('status', 'Edit profile successfully');
     }
 
     /**

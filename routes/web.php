@@ -45,7 +45,7 @@ Route::resource('/product',ProductController::class);
 Route::resource('/users',UserController::class);
 Route::resource('/admin',AdminController::class);
 Route::resource('/dash',DashController::class);
-Route::resource('/profile',ProfileDashController::class);
+Route::resource('/profileAdmin',ProfileDashController::class);
 
 
 

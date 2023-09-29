@@ -690,6 +690,7 @@
                     <div class="row">
                         <div class="col col-lg-3">
                             <div class="vd_tab_area">
+                                
                                 <div class="vd_space">
                                     <div class="vd_info_wrap text-center">
                                         <div class="vd_image">
@@ -748,7 +749,7 @@
                                             role="tab" aria-selected="false">
                                             Profile
                                         </button> --}}
-                                        <a href="{{route('profile.index')}}">Profile</a>
+                                        <a href="{{route('profileAdmin.index')}}">Profile</a>
                                     </li>
                                     
                                     <li>
