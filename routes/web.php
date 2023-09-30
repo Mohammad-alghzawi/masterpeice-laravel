@@ -2,6 +2,7 @@
 
 
 
+use App\Http\Controllers\AboutusController;
 use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VendorController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\ProfileDashController;
 use App\Http\Controllers\VendorrController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DiscountController;
+
 
 
 
@@ -67,3 +69,4 @@ Route::resource('/discount',DiscountController::class);
 
 //--------Home page------------
 Route::get('/index',[HomeController::class,'index']);
+Route::get('/aboutus',[AboutusController::class,'index']);
