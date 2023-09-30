@@ -75,11 +75,11 @@
 									<div class="header-icons">
 										<a class="shopping-cart" href="cart.html"><i
 												class="fas fa-shopping-cart"></i></a>
-										<a class="mobile-hide search-bar-icon" href="#"><i
-												class="fas fa-search"></i></a>
+										
 										<a href="./userprofile1.html"><i
 												class="fa-solid fa-user"></i></a>
-										<a href="./login-signup.html"><button class="button-nav">logout</button></a>
+										<a href="./login-signup.html"><button class="button-nav">Login</button></a>
+										<a href="./login-signup.html"><button class="button-nav">Register</button></a>
 									</div>
 								</li>
 							</ul>

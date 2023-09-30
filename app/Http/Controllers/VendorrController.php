@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\Vendor;
 
-class CategoryContoller extends Controller
+class VendorrController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +14,10 @@ class CategoryContoller extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-
-        return view('dash.Category.index', compact('categories'));
+        $vendors=Vendor::all();
+        return view('dash.vendore.index',compact('vendors'));
     }
- 
+   
 
     /**
      * Show the form for creating a new resource.
@@ -27,7 +26,7 @@ class CategoryContoller extends Controller
      */
     public function create()
     {
-        return view('dash.Category.create');
+        return view('dash.vendore.create');
     }
 
     /**
@@ -38,24 +37,21 @@ class CategoryContoller extends Controller
      */
     public function store(Request $request)
     {
-        // $input=$request->all();
-        // Category::create($input);
-        // $categories = Category::all();
-        $imageCategory = new Category;
+        $imageVendor = new Vendor;
 
-        $imageCategory->title = $request->title;
-        $imageCategory->discount = $request->discount;
+        $imageVendor->name = $request->name;
+        $imageVendor->desciption = $request->desciption;
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
+        if ($request->hasFile('logo')) {
+            $image = $request->file('logo');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $imageName); // Upload the image to the public/images directory
-            $imageCategory->image = $imageName;
+            $imageVendor->logo = $imageName;
         }
 
-        $imageCategory->save();
+        $imageVendor->save();
         // return redirect('dash.home', compact('categories'));
-        return redirect()->route('category.index')->with('status','Add category successfully');
+        return redirect()->route('vendor.index')->with('status','Add vendor successfully');
     }
 
     /**
@@ -77,8 +73,8 @@ class CategoryContoller extends Controller
      */
     public function edit($id)
     {
-        $data = Category::find($id);
-        return view('dash.Category.edit')->with('data', $data);
+        $data = Vendor::find($id);
+        return view('dash.vendore.edit')->with('data', $data);
     }
 
     /**
@@ -90,39 +86,25 @@ class CategoryContoller extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'discount' => 'numeric',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        // Find the category by ID
-        $category = Category::find($id);
+        $vendor = Vendor::find($id);
 
         // Update category attributes based on form data
-        $category->title = $request->input('title');
-        $category->discount = $request->input('discount');
+        $vendor->name = $request->input('name');
+        $vendor->desciption = $request->input('desciption');
 
         // Handle image upload if a new image is provided
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
+        if ($request->hasFile('logo')) {
+            $image = $request->file('logo');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $imageName); // Upload the image to the public/images directory
-            $category->image = $imageName;
+            $vendor->logo = $imageName;
         }
 
         // Save the updated category
-        $category->save();
+        $vendor->save();
 
         // Redirect back to the category index or wherever you want
-        return redirect()->route('category.index')->with('status','Edit category successfully');
-
-
-
-
-
-
+        return redirect()->route('vendor.index')->with('status','Edit vendor successfully');
     }
 
     /**
@@ -133,7 +115,7 @@ class CategoryContoller extends Controller
      */
     public function destroy($id)
     {
-        Category::destroy($id);
-        return redirect()->route('category.index')->with('status','Delete category successfully');
+        Vendor::destroy($id);
+        return redirect()->route('vendor.index')->with('status','Delete vendor successfully');
     }
 }

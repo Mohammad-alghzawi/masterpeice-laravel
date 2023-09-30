@@ -4,6 +4,7 @@
 
 use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryContoller;
 use App\Http\Controllers\ProductController;
@@ -11,7 +12,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashController;
 use App\Http\Controllers\ProfileDashController;
-use App\Http\Controllers\LoginDashController;
+use App\Http\Controllers\VendorrController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DiscountController;
+
+
 
 
 
@@ -51,9 +56,14 @@ Route::resource('/users',UserController::class);
 Route::resource('/admin',AdminController::class);
 Route::resource('/dash',DashController::class);
 Route::resource('/profileAdmin',ProfileDashController::class);
-Route::resource('/loginDash',LoginDashController::class);
+Route::resource('/vendor',VendorrController::class);
+Route::resource('/discount',DiscountController::class);
 
 
 
 
 
+
+
+//--------Home page------------
+Route::get('/index',[HomeController::class,'index']);

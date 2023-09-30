@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Discount;
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Vendor;
 
-class DiscountController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,10 @@ class DiscountController extends Controller
      */
     public function index()
     {
-        $discounts=Discount::all();
-        return view('dash.Discount.index',compact('discounts'));
+        $categories = Category::all();
+        $vendors=Vendor::all();
+        return view('pages.index', compact('categories','vendors'));
+    
     }
 
     /**
@@ -25,7 +28,7 @@ class DiscountController extends Controller
      */
     public function create()
     {
-        return view('dash.Discount.create');
+        //
     }
 
     /**
@@ -36,19 +39,16 @@ class DiscountController extends Controller
      */
     public function store(Request $request)
     {
-        $input=$request->all();
-        Discount::create($input);
-        return redirect()->route('discount.index')->with('status','Add Discount successfully');
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Discount  $discount
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Discount $discount)
+    public function show($id)
     {
         //
     }
@@ -56,42 +56,34 @@ class DiscountController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Discount  $discount
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $data=Discount::find($id);
-        return view('dash.Discount.edit')->with('data',$data);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Discount  $discount
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        $input=$request->all();
-        $discounts=Discount::find($id);
-        $discounts->update($input);
-      
-        return redirect()->route('discount.index')->with('status','Edit Discount successfully');
-
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Discount  $discount
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Discount::destroy($id);
-        return redirect()->route('discount.index')->with('status','Delete Discount successfully');
-
+        //
     }
 }
