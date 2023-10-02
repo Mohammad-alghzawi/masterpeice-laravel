@@ -23,9 +23,11 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Logo</th>
+                                
                                 <th>name</th>
                                 <th>description</th>
-                                <th>Logo</th>
+                                
                                 <th>Edit/Delete</th>
                                 
                             </tr>
@@ -35,10 +37,14 @@
                                 <tr>
                                     <td>{{ $vendor->id }}</td>
                                     <td><a href="#"><img src="{{ url('/images/' . $vendor->logo) }}" width="100px"
-                                                height="100px" alt="Avatar"></a></td>
-
+                                        height="100px" alt="Avatar"></a></td>
+                                   
                                     <td>{{ $vendor->name }}</td>
                                     <td>{{ $vendor->desciption }}</td>
+                                    
+
+                                 
+                                    
 
 
                                     <td>

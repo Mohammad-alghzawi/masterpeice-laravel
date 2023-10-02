@@ -39,20 +39,26 @@
                                 <input type="text" class="form-input" name="product_quantity" id="product_quantity"
                                     placeholder="Product Quantity" />
                             </div>
-                            <div class="form-group">
-                                <input type="text" class="form-input" name="product_status" id="product_status"
-                                    placeholder="Product Status" />
+                            <div>
+                                {{-- <input type="text" class="form-input" name="product_status" id="product_status"
+                                    placeholder="Product Status" /> --}}
+                                    <select name="product_status" id="product_status">
+                                        <option value="" selected disabled>product_status</option>
+                                        <option value="1">Instock</option>
+                                        <option value="0">Out of stock</option>
+                                    </select>
                             </div>
                      
                             <div>
                                 <select name="categories" id="categories">
+                                    <option value="" selected disabled>choose category</option>
                                     @foreach ($categories as $item)
                                    
                                         <option value="{{ $item->id }}">{{ $item->title }}</option>
                                      
                                     @endforeach
                                     
-                                </select>
+                                </select><br><br><br><br>
                             </div>
                             <div class="form-group mt-4">
                                 <input name="product_image" type="file" class="form-control white-input"

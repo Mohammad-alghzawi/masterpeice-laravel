@@ -44,28 +44,34 @@
                 <div class="col-md-12">
                     <div class="product-filters">
                         <ul>
+				@foreach ($products as $item)
+
                             <li class="active" data-filter="*">All</li>
-                            <li data-filter=".materials">Agriculture materials</li>
-                            <li data-filter=".tools">Agriculture tools</li>
-                            <li data-filter=".Seeds">Seeds</li>
+                            <li data-filter=".{{$item->category->name}}">Agriculture materials</li>
+							@endforeach
                         </ul>
                     </div>
                 </div>
             </div>
 
+<p style="color:black">We found <strong class="text-brand" style="color: orange">{{$products->total()}}</strong> item for you!</p><br>
+
 			<div class="row product-lists">
-				<div class="col-lg-4 col-md-6 text-center tools ">
+				@foreach ($products as $item)
+					
+				
+				<div class="col-lg-4 col-md-6 text-center {{$item->category->name}}">
 					<div class="single-product-item ">
 						<div class="product-image">
-							<a href="single-product.html"><img src="./assets/img/gloves-removebg-preview.png" alt=""></a>
+							<a href="single-product.html"> <img src="{{ url('/images/' . $item->product_image) }}" ></a>
 						</div>
-						<h3>Agri gloves</h3>
-						<p class="product-price"> 15 JOD </p>
+						<h3>{{$item->product_name}}</h3>
+						<p class="product-price"> {{$item->product_price}}JOD </p>
 						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
 					</div>
 				</div>
-                            
-				<div class="col-lg-4 col-md-6 text-center tools ">
+				@endforeach         
+				{{-- <div class="col-lg-4 col-md-6 text-center tools ">
 					<div class="single-product-item">
 						<div class="product-image">
 							<a href="single-product.html"><img src="./assets/img/tol_1-removebg-preview.png" alt=""></a>
@@ -114,18 +120,34 @@
 						<p class="product-price"> 30 JOD </p>
 						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
 					</div>
-				</div>
+				</div> --}}
+				
+					
+				
+				
 			</div>
 
 			<div class="row">
 				<div class="col-lg-12 text-center">
 					<div class="pagination-wrap">
 						<ul>
-							<li><a href="#">Prev</a></li>
-							<li><a href="#">1</a></li>
-							<li><a class="active" href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">Next</a></li>
+							@if ($products->onFirstPage())
+								<li><a href="#"></i>Prev</a></li>
+							@else
+								<li><a href="{{ $products->previousPageUrl() }}">Prev</i></a></li>
+							@endif
+  
+							@for ($i = 1; $i <= $products->lastPage(); $i++)
+								@if ($i == $products->currentPage())
+									<li class="active"><a href="#">{{ $i }}</a></li>
+								@else
+									<li><a href="{{ $products->url($i) }}">{{ $i }}</a></li>
+								@endif
+							@endfor
+  
+							@if ($products->hasMorePages())
+								<li><a href="{{ $products->nextPageUrl() }}">Next</i></a></li>
+							@endif
 						</ul>
 					</div>
 				</div>
@@ -136,28 +158,31 @@
 
 <!-- logo carousel -->
 <div class="logo-carousel-section">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="logo-carousel-inner">
-					<div class="single-logo-item">
-						<img src="assets/img/company-logos/hamad-removebg-preview.png" alt="">
-					</div>
-					<div class="single-logo-item">
-						<img src="assets/img/company-logos/alghzawi-removebg-preview.png" alt="">
-					</div>
-					<div class="single-logo-item">
-						<img src="assets/img/company-logos/mohammad-removebg-preview.png" alt="">
-					</div>
-					<div class="single-logo-item">
-						<img src="assets/img/company-logos/the_farm-removebg-preview.png" alt="">
-					</div>
+    
+    <div class="container">
+        
+        <div class="row">
+           
+            
+            
+            <div class="col-lg-12">
+               
+                <div class="logo-carousel-inner">
+                    @foreach ($vendors as $vendor ) 
+                    <div class="single-logo-item">
+                        <img src="{{ url('/images/' . $vendor->logo) }}" >
+                    </div>
+                   
 
-
-				</div>
-			</div>
-		</div>
-	</div>
+                    @endforeach
+                </div>
+                
+            </div>
+            
+        </div>
+       
+    </div>
+   
 </div>
 <!-- end logo carousel -->
 @endsection

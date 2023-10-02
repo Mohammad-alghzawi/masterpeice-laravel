@@ -41,6 +41,7 @@ class VendorrController extends Controller
 
         $imageVendor->name = $request->name;
         $imageVendor->desciption = $request->desciption;
+        
 
         if ($request->hasFile('logo')) {
             $image = $request->file('logo');
@@ -91,6 +92,7 @@ class VendorrController extends Controller
         // Update category attributes based on form data
         $vendor->name = $request->input('name');
         $vendor->desciption = $request->input('desciption');
+      
 
         // Handle image upload if a new image is provided
         if ($request->hasFile('logo')) {

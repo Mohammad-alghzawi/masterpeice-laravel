@@ -5,6 +5,7 @@
 use App\Http\Controllers\AboutusController;
 use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryContoller;
@@ -16,6 +17,7 @@ use App\Http\Controllers\ProfileDashController;
 use App\Http\Controllers\VendorrController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DiscountController;
+
 
 
 
@@ -69,4 +71,7 @@ Route::resource('/discount',DiscountController::class);
 
 //--------Home page------------
 Route::get('/index',[HomeController::class,'index']);
+
 Route::get('/aboutus',[AboutusController::class,'index']);
+Route::get('/shop/{id}',[ShopController::class,'index'])->name('allproduct');
+// Route::match(['get', 'post'], '/allproduct/{id}', [ShopController::class, 'show_product'])->name('allproduct');

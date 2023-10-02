@@ -3,26 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
-use App\Models\Vendor;
 use App\Models\Product;
+use App\Models\Vendor;
 
-class HomeController extends Controller
+class ShopController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $categories = Category::all();
-        $vendors=Vendor::all();
-        $arrives = Product::latest()->take(6)->get();
-        $productsChunks = $arrives->chunk(3);
-        return view('pages.index', compact('categories','vendors','productsChunks'));
+   
     
+    public function index($id)
+    {
+        $vendors = Vendor::all();
+        $products = Product::where('category_id', $id)->paginate(6);
+    
+        return view('pages.shop', compact('vendors', 'products'));
     }
+    
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -33,9 +35,6 @@ class HomeController extends Controller
     {
         //
     }
-
-
-   
 
     /**
      * Store a newly created resource in storage.

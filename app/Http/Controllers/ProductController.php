@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products=Product::all();
+        $products = Product::all();
         return view('dash.Product.index', compact('products'));
     }
 
@@ -26,9 +26,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories=Category::all();
-       
-        return view('dash.Product.create',compact('categories'));
+        $categories = Category::all();
+
+        return view('dash.Product.create', compact('categories'));
     }
 
     /**
@@ -38,8 +38,8 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-{
-    $product = new Product;
+    {
+        $product = new Product();
 
         $product->product_name = $request->product_name;
         $product->product_description = $request->product_description;
@@ -57,8 +57,8 @@ class ProductController extends Controller
 
         $product->save();
         // return redirect('dash.home', compact('categories'));
-        return redirect()->route('product.index')->with('status','Add product successfully');
-}
+        return redirect()->route('product.index')->with('status', 'Add product successfully');
+    }
 
 
     /**
@@ -79,12 +79,12 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-{
-    $data = Product::find($id);
-    $categories = Category::all();
-    
-    return view('dash.Product.edit', compact('data', 'categories'));
-}
+    {
+        $data = Product::find($id);
+        $categories = Category::all();
+
+        return view('dash.Product.edit', compact('data', 'categories'));
+    }
 
 
     /**
@@ -103,13 +103,13 @@ class ProductController extends Controller
             $profileImage = date('YmdHis') . "." . $product_image->getClientOriginalExtension();
             $product_image->move($destinationPath, $profileImage);
             $input['product_image'] = "$profileImage";
-        }else{
-            $input['product_image']= $product->product_image;
+        } else {
+            $input['product_image'] = $product->product_image;
         }
 
         $product->update($input);
         // return redirect('dash.home', compact('categories'));
-        return redirect()->route('product.index')->with('status','Edit product successfully');
+        return redirect()->route('product.index')->with('status', 'Edit product successfully');
     }
 
     /**
@@ -121,6 +121,6 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::destroy($id);
-        return redirect()->route('product.index')->with('status','Delete product successfully');
+        return redirect()->route('product.index')->with('status', 'Delete product successfully');
     }
 }

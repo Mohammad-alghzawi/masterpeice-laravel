@@ -98,7 +98,7 @@
                         @foreach ($owners as $item)
                             <div class="single-testimonial-slider">
                                 <div class="client-avater">
-                                    <img src="{{ url('/images/' . $item->logo) }}">
+                                    <img src="{{ url('/images/' . $item->logo) }}" >
                                 </div>
                                 <div class="client-meta">
                                     <h3>{{ $item->name }}</h3>
@@ -120,7 +120,7 @@
     <!-- end testimonail-section -->
 
     <!-- logo carousel -->
-    <div class="logo-carousel-section">
+    {{-- <div class="logo-carousel-section">
     
         <div class="container">
             
@@ -146,6 +146,6 @@
            
         </div>
        
-    </div>
+    </div> --}}
 
 @endsection

@@ -133,7 +133,7 @@
                     </div>
                     <br><br>
 
-                    <a href="shop.html" class="cart-btn"> {{ $item->title }}</a>
+                    <a href="{{ route('allproduct', ['id' => $item->id]) }}" class="cart-btn">{{ $item->title }}</a>
                 </div>
             </div>
 {{--             
@@ -164,81 +164,46 @@
 </div>
 <!-- end product section -->
 
-<!-- ----------most sellers--------- -->
+<!-- ----------new arrival--------- -->
 <div class="row">
     <div class="col-lg-8 offset-lg-2 text-center">
         <div class="section-title">
-            <h3><span class="orange-text">Most</span> sellers</h3>
+            <h3><span class="orange-text">New</span> Arrival</h3>
 
         </div>
     </div>
 </div>
 
-<div class="container text-center my-3">
 
+<div class="container text-center my-3">
     <div class="row mx-auto my-auto">
         <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
             <div class="carousel-inner w-100" role="listbox">
-                <div class="carousel-item active">
-                    <div class="col-md-4 flexb">
-                        <div class="card card-body inlineb">
-                            <img class="img-fluid" src="./assets/img/fer3-removebg-preview.png">
-                            <p>NPK fertilizer</p>
-                            <p> 35 JOD</p>
-                            <a href="cart.html"><button class="sellbutton">Add to cart</button></a>
-                        </div>
-                        <div class="card card-body inlineb">
-                            <img class="img-fluid" src="./assets/img/gloves-removebg-preview.png">
-                            <p>Agri Gloves</p>
-                            <p> 15 JOD</p>
-                            <a href="cart.html"><button class="sellbutton">Add to cart</button></a>
-                        </div>
-                        <div class="card card-body inlineb">
-                            <img class="img-fluid" src="./assets/img/image__31_-removebg-preview.png">
-                            <p>Nitro fertilizer</p>
-                            <p> 50 JOD</p>
-                            <a href="cart.html"><button class="sellbutton">Add to cart</button></a>
+                <?php foreach ($productsChunks as $index => $chunk): ?>
+                    <div class="carousel-item <?php echo ($index === 0) ? 'active' : ''; ?>">
+                        <div class="col-md-4 flexb">
+                            <?php foreach ($chunk as $product): ?>
+                                <div class="card card-body inlineb">
+                                    <img class="img-fluid" src="{{ url('/images/' . $product->product_image) }}"<?php echo $product->image; ?>">
+                                    <p><?php echo $product->product_name; ?></p>
+                                    <p><?php echo $product->product_price; ?> JOD</p>
+                                    <a href="cart.html"><button class="sellbutton">Add to cart</button></a>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="col-md-4 flexb">
-                        <div class="card card-body inlineb">
-                            <img class="img-fluid" src="./assets/img/tol_1-removebg-preview.png"><br>
-                            <p>Handle scissors</p>
-                            <p> 12 JOD</p>
-                            <a href="cart.html"><button class="sellbutton">Add to cart</button></a>
-                        </div>
-                        <div class="card card-body inlineb">
-                            <img class="img-fluid" src="./assets/img/fer_1-removebg-preview.png"><br>
-                            <p>Agasol fertilizer</p>
-                            <p> 25 JOD</p>
-                            <a href="cart.html"><button class="sellbutton">Add to cart</button></a>
-                        </div>
-                        <div class="card card-body inlineb">
-                            <img class="img-fluid" src="./assets/img/tol_3-removebg-preview.png"><br>
-                            <p>Water hose</p>
-                            <p> 30 JOD</p>
-                            <a href="cart.html"><button class="sellbutton">Add to cart</button></a>
-                        </div>
-                    </div>
-                </div>
-
+                <?php endforeach; ?>
             </div>
             <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle"
-                    aria-hidden="true"></span>
+                <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
             </a>
             <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle"
-                    aria-hidden="true"></span>
+                <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
         </div>
     </div>
-
 </div>
 <br><br><br><br>
 
