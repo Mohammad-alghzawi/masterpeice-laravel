@@ -40,9 +40,14 @@
                                 <input type="text" class="form-input" name="product_quantity"  value="{{$data->product_quantity}}" id="product_quantity"
                                     placeholder="Product Quantity" />
                             </div>
-                            <div class="form-group">
-                                <input type="text" class="form-input" name="product_status"  value="{{$data->product_status}}" id="product_status"
-                                    placeholder="Product Status" />
+                            <div class="">
+                                {{-- <input type="text" class="form-input" name="product_status"  value="{{$data->product_status}}" id="product_status"
+                                    placeholder="Product Status" /> --}}
+                                    <select name="product_status" id="product_status">
+                                        <option value="" selected disabled>product_status</option>
+                                        <option value="1">Instock</option>
+                                        <option value="0">Out of stock</option>
+                                    </select>
                             </div>
 
                            
@@ -54,7 +59,7 @@
                                      
                                     @endforeach
                                     
-                                </select>
+                                </select><br><br><br>
                             </div>
                             
                             <div class="form-group mt-4">

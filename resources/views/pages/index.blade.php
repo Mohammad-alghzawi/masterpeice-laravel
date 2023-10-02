@@ -30,7 +30,7 @@
                     <div class="hero-text">
                         <div class="hero-text-tablecell">
                             <p class="subtitle">FLA7I OFFERS</p>
-                            <h1>Online stores for selling agricultural materials with 20% sale</h1>
+                            <h1>Online stores for selling agricultural materials discount</h1>
                             <div class="hero-btns">
                                 <a href="about.html" class="boxed-btn">About Us</a>
                                 <a href="contact.html" class="bordered-btn">Contact Us</a>
@@ -49,7 +49,7 @@
                     <div class="hero-text">
                         <div class="hero-text-tablecell">
                             <p class="subtitle">FLA7I OFFERS</p>
-                            <h1>All our products have 20% sale</h1>
+                            <h1>All our products have discount</h1>
                             <div class="hero-btns">
                                 <a href="about.html" class="boxed-btn">About Us</a>
                                 <a href="contact.html" class="bordered-btn">Contact Us</a>

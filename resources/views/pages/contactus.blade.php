@@ -86,14 +86,21 @@
 
 <!-- logo carousel -->
 <div class="logo-carousel-section">
+    
     <div class="container">
+        
         <div class="row">
+           
+            
+            
             <div class="col-lg-12">
+               
                 <div class="logo-carousel-inner">
+                    @foreach ($vendors as $vendor ) 
                     <div class="single-logo-item">
-                        <img src="assets/img/company-logos/hamad-removebg-preview.png" alt="">
+                        <img src="{{ url('/images/' . $vendor->logo) }}" >
                     </div>
-                    <div class="single-logo-item">
+                    {{-- <div class="single-logo-item">
                         <img src="assets/img/company-logos/alghzawi-removebg-preview.png" alt="">
                     </div>
                     <div class="single-logo-item">
@@ -101,13 +108,17 @@
                     </div>
                     <div class="single-logo-item">
                         <img src="assets/img/company-logos/the_farm-removebg-preview.png" alt="">
-                    </div>
+                    </div> --}}
 
-
+                    @endforeach
                 </div>
+                
             </div>
+            
         </div>
+       
     </div>
+   
 </div>
 <!-- end logo carousel -->
 @endsection

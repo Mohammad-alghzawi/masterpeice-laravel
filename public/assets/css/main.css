@@ -2529,6 +2529,7 @@ ul.social-link-team li a {
   border-radius: 3px;
   width: 100%;
   resize: none;
+  margin-top: 20px;
 }
 
 .contact-form-wrap {

@@ -33,7 +33,7 @@
 
 				<div class="col-lg-3 col-md-6">
 					<div class="footer-box about-widget">
-						<img src="./assets/img/sereen-removebg-preview.png" alt="">
+						<img src={{asset('./assets/img/sereen-removebg-preview.png')}} alt="">
 					</div>
 				</div>
 				

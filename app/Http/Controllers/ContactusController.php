@@ -3,40 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
 use App\Models\Vendor;
 
-class ShopController extends Controller
+
+class ContactusController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-   
-    
-    public function index($id)
+    public function index()
     {
         $vendors = Vendor::all();
-        $products = Product::where('category_id', $id)->paginate(6);
-    
-        return view('pages.shop', compact('vendors', 'products'));
+        return view('pages.contactus',compact('vendors'));
     }
-    public function singleproduct($id)
-    {
-        $vendors = Vendor::all();
-        $productdetail = Product::find($id);
-        $productdetails = collect([$productdetail]);
-        $relatedProducts = Product::where('category_id', $productdetail->category_id)
-    ->where('id', '<>', $id)
-    ->inRandomOrder()
-    ->take(3) 
-    ->get();
-        return view('pages.single', compact('productdetails','relatedProducts','vendors'));
-    }
-    
-
-
 
     /**
      * Show the form for creating a new resource.

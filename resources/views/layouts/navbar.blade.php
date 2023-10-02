@@ -55,7 +55,7 @@
 						<!-- logo -->
 						<div class="site-logo">
 							<a href="index.html">
-								<img id="logom" src="assets/img/sereen-removebg-preview.png" alt="">
+								<img id="logom" src={{asset('assets/img/sereen-removebg-preview.png')}} alt="">
 							</a>
 						</div>
 						<!-- logo -->

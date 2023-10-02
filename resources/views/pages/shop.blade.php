@@ -40,7 +40,7 @@
 	<div class="product-section mt-150 mb-150">
 		<div class="container">
 
-			<div class="row">
+			{{-- <div class="row">
                 <div class="col-md-12">
                     <div class="product-filters">
                         <ul>
@@ -52,7 +52,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
 <p style="color:black">We found <strong class="text-brand" style="color: orange">{{$products->total()}}</strong> item for you!</p><br>
 
@@ -63,7 +63,7 @@
 				<div class="col-lg-4 col-md-6 text-center {{$item->category->name}}">
 					<div class="single-product-item ">
 						<div class="product-image">
-							<a href="single-product.html"> <img src="{{ url('/images/' . $item->product_image) }}" ></a>
+							<a href="{{ route('productdetail', ['id' => $item->id]) }}"> <img src="{{ url('/images/' . $item->product_image) }}" ></a>
 						</div>
 						<h3>{{$item->product_name}}</h3>
 						<p class="product-price"> {{$item->product_price}}JOD </p>

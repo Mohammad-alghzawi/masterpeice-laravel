@@ -17,6 +17,7 @@ use App\Http\Controllers\ProfileDashController;
 use App\Http\Controllers\VendorrController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\ContactusController;
 
 
 
@@ -70,8 +71,9 @@ Route::resource('/discount',DiscountController::class);
 
 
 //--------Home page------------
-Route::get('/index',[HomeController::class,'index']);
+Route::get('/',[HomeController::class,'index']);
 
 Route::get('/aboutus',[AboutusController::class,'index']);
+Route::get('/contactus',[ContactusController::class,'index']);
 Route::get('/shop/{id}',[ShopController::class,'index'])->name('allproduct');
-// Route::match(['get', 'post'], '/allproduct/{id}', [ShopController::class, 'show_product'])->name('allproduct');
+Route::get('/detail/{id}',[ShopController::class,'singleproduct'])->name('productdetail');
