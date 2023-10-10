@@ -50,7 +50,9 @@
 				<div class="col-md-7">
 					<div class="single-product-content">
 						<h3> {{$item->product_name}}</h3>
-						<p class="single-product-pricing"><span></span>{{$item->product_price}} JOD</p>
+						<p style="text-decoration: line-through; color: red;" class="single-product-pricing"><span></span>{{$item->product_price}} JOD</p>
+
+						<p class="single-product-pricing"><span></span>{{$price}}JOD</p>
 						<p>{{$item->product_description}}</p><br>
 						<div class="single-product-form">
 							<form action="index.html">

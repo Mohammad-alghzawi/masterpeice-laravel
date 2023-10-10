@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Vendor;
+use App\Models\Category;
 
 class ShopController extends Controller
 {
@@ -19,20 +20,49 @@ class ShopController extends Controller
     {
         $vendors = Vendor::all();
         $products = Product::where('category_id', $id)->paginate(6);
+        // dd($id);
+        $discount= Category::where('id',$id)->get();
+       $dis=(($discount[0]->discount));
+    $productdetail = Product::find($id);
+    // dd($productdetail);
+
+    $prices=$productdetail->product_price;
+    // dd($prices);
+    $price=$prices* $dis;
+        // dd($discount[0]->discount);
+       $dis=(($discount[0]->discount)*100);
     
-        return view('pages.shop', compact('vendors', 'products'));
+        return view('pages.shop', compact('vendors', 'products','dis',"price"));
+
     }
     public function singleproduct($id)
+
     {
+
         $vendors = Vendor::all();
+        $cat_id=Product::find($id);
+
+        $discount= Category::where('id',$cat_id->category_id)->get();
+        // dd($discount);
+       $dis=(($discount[0]->discount));
+    //    dd($dis);
+
         $productdetail = Product::find($id);
+        // dd($productdetail);
+
+        $prices=$productdetail->product_price;
+        // dd($prices);
+        $price=$prices* $dis;
+        
+        // dd('$dis',$dis,'$price',$price);
         $productdetails = collect([$productdetail]);
         $relatedProducts = Product::where('category_id', $productdetail->category_id)
     ->where('id', '<>', $id)
     ->inRandomOrder()
     ->take(3) 
     ->get();
-        return view('pages.single', compact('productdetails','relatedProducts','vendors'));
+
+        return view('pages.single', compact('productdetails','relatedProducts','vendors','price'));
     }
     
 
