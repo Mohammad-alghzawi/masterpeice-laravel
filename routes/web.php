@@ -71,9 +71,9 @@ Route::resource('/discount',DiscountController::class);
 
 
 //--------Home page------------
-Route::get('/',[HomeController::class,'index']);
+Route::get('/',[HomeController::class,'index'])->name('home');
 
-Route::get('/aboutus',[AboutusController::class,'index']);
-Route::get('/contactus',[ContactusController::class,'index']);
+Route::get('/aboutus',[AboutusController::class,'index'])->name('about');
+Route::get('/contactus',[ContactusController::class,'index'])->name('contact');
 Route::get('/shop/{id}',[ShopController::class,'index'])->name('allproduct');
 Route::get('/detail/{id}',[ShopController::class,'singleproduct'])->name('productdetail');

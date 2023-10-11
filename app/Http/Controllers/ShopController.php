@@ -32,7 +32,7 @@ class ShopController extends Controller
         // dd($discount[0]->discount);
        $dis=(($discount[0]->discount)*100);
     
-        return view('pages.shop', compact('vendors', 'products','dis',"price"));
+        return view('pages.shop', compact('vendors', 'products','dis','price'));
 
     }
     public function singleproduct($id)

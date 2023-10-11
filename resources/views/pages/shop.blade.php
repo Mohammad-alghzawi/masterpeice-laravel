@@ -57,82 +57,83 @@
             <p style="color:black">We found <strong class="text-brand"
                     style="color: orange">{{ $products->total() }}</strong> item for you!</p><br>
 
-            <div class="row product-lists">
-                @foreach ($products as $item)
-                    <div class="col-lg-4 col-md-6 text-center {{ $item->category->name }}">
-                        <div class="single-product-item ">
-                            <div class="product-image">
-                                <a href="{{ route('productdetail', ['id' => $item->id]) }}"> <img
-                                        src="{{ url('/images/' . $item->product_image) }}"></a>
+                    <div class="row product-lists">
+                        @foreach ($products as $item)
+                            <div class="col-lg-4 col-md-6 text-center {{ $item->category->name }}">
+                                <div class="single-product-item ">
+                                    <div class="product-image">
+                                        <a href="{{ route('productdetail', ['id' => $item->id]) }}"> <img
+                                                src="{{ url('/images/' . $item->product_image) }}"></a>
+                                    </div>
+                                    <h3>{{ $item->product_name }}</h3>
+                                    <p class="product-price">
+                                        <span style="text-decoration: line-through; color: rgba(255, 0, 0, 0.763); font-size: 35px; display: inline-block; margin-bottom:5px;">{{ $item->product_price }}JOD</span>
+                                      <span style="font-size: 25px">{{ $item->product_price - ($item->product_price * $dis / 100) }}JOD</span>
+        
+                                        <span style="margin-left: 20px;  position: relative;
+                                        bottom: 400px; right:15px" class="discount-circle">{{$dis}}%</span>
+                                    </p>
+                                    
+                                    
+                                    <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                                </div>
                             </div>
-                            <h3>{{ $item->product_name }}</h3>
-                            <p class="product-price">
-                                <span style="text-decoration: line-through; color: rgba(255, 0, 0, 0.763); font-size: 35px; display: inline-block; margin-bottom:5px;">{{ $item->product_price }}JOD</span>
-                                <span style="font-size: 25px" >{{ $price }}JOD</span>
-                                <span style="margin-left: 20px;  position: relative;
-                                bottom: 400px; right:15px" class="discount-circle">{{$dis}}%</span>
-                            </p>
-                            
-							
-                            <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                        @endforeach
+                        {{-- <div class="col-lg-4 col-md-6 text-center tools ">
+                            <div class="single-product-item">
+                                <div class="product-image">
+                                    <a href="single-product.html"><img src="./assets/img/tol_1-removebg-preview.png" alt=""></a>
+                                </div>
+                                <h3>Handle scissors</h3>
+                                <p class="product-price"> 12 JOD </p>
+                                <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                            </div>
                         </div>
+                        <div class="col-lg-4 col-md-6 text-center materials">
+                            <div class="single-product-item">
+                                <div class="product-image">
+                                    <a href="single-product.html"><img src="./assets/img/fer3-removebg-preview.png" alt=""></a>
+                                </div>
+                                <h3>Fertilizer</h3>
+                                <p class="product-price"> 35 JOD </p>
+                                <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 text-center materials">
+                            <div class="single-product-item">
+                                <div class="product-image">
+                                    <a href="single-product.html"><img src="./assets/img/image__31_-removebg-preview.png" alt=""></a>
+                                </div>
+                                <h3>Fertilizer</h3>
+                                <p class="product-price"> 50 JOD</p>
+                                <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 text-center materials">
+                            <div class="single-product-item">
+                                <div class="product-image">
+                                    <a href="single-product.html"><img src="./assets/img/fer_1-removebg-preview.png" alt=""></a>
+                                </div>
+                                <h3>Fertilizer</h3>
+                                <p class="product-price"> 25 JOD </p>
+                                <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 text-center tools">
+                            <div class="single-product-item">
+                                <div class="product-image">
+                                    <a href="single-product.html"><img src="./assets/img/tol_3-removebg-preview.png" alt=""></a>
+                                </div>
+                                <h3>Water hose</h3>
+                                <p class="product-price"> 30 JOD </p>
+                                <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                            </div>
+                        </div> --}}
+        
+        
+        
+        
                     </div>
-                @endforeach
-                {{-- <div class="col-lg-4 col-md-6 text-center tools ">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="./assets/img/tol_1-removebg-preview.png" alt=""></a>
-						</div>
-						<h3>Handle scissors</h3>
-						<p class="product-price"> 12 JOD </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center materials">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="./assets/img/fer3-removebg-preview.png" alt=""></a>
-						</div>
-						<h3>Fertilizer</h3>
-						<p class="product-price"> 35 JOD </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center materials">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="./assets/img/image__31_-removebg-preview.png" alt=""></a>
-						</div>
-						<h3>Fertilizer</h3>
-						<p class="product-price"> 50 JOD</p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center materials">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="./assets/img/fer_1-removebg-preview.png" alt=""></a>
-						</div>
-						<h3>Fertilizer</h3>
-						<p class="product-price"> 25 JOD </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center tools">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="./assets/img/tol_3-removebg-preview.png" alt=""></a>
-						</div>
-						<h3>Water hose</h3>
-						<p class="product-price"> 30 JOD </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div> --}}
-
-
-
-
-            </div>
 
             <div class="row">
                 <div class="col-lg-12 text-center">

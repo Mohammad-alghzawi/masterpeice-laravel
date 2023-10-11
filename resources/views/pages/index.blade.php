@@ -184,7 +184,7 @@
                         <div class="col-md-4 flexb">
                             <?php foreach ($chunk as $product): ?>
                                 <div class="card card-body inlineb">
-                                    <img class="img-fluid" src="{{ url('/images/' . $product->product_image) }}"<?php echo $product->image; ?>">
+                                    <img style=" height:150px" class="img-fluid" src="{{ url('/images/' . $product->product_image) }}"<?php echo $product->image; ?>">
                                     <p><?php echo $product->product_name; ?></p>
                                     <p><?php echo $product->product_price; ?> JOD</p>
                                     <a href="cart.html"><button class="sellbutton">Add to cart</button></a>
