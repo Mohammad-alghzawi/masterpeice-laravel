@@ -165,7 +165,7 @@
 <!-- end product section -->
 
 <!-- ----------new arrival--------- -->
-<div class="row">
+<div class="row" >
     <div class="col-lg-8 offset-lg-2 text-center">
         <div class="section-title">
             <h3><span class="orange-text">New</span> Arrival</h3>
@@ -178,9 +178,9 @@
 <div class="container text-center my-3">
     <div class="row mx-auto my-auto">
         <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
-            <div class="carousel-inner w-100" role="listbox">
+            <div class="carousel-inner w-100" role="listbox" >
                 <?php foreach ($productsChunks as $index => $chunk): ?>
-                    <div class="carousel-item <?php echo ($index === 0) ? 'active' : ''; ?>">
+                    <div  class="carousel-item <?php echo ($index === 0) ? 'active' : ''; ?>">
                         <div class="col-md-4 flexb">
                             <?php foreach ($chunk as $product): ?>
                                 <div class="card card-body inlineb">

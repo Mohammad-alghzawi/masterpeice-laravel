@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="breadcrumb-text">
-                        <p>Fresh and Organic</p>
+                        <p>Everything are Original</p>
                         <h1>Shop</h1>
                     </div>
                 </div>
@@ -69,7 +69,8 @@
                             <p class="product-price">
                                 <span style="text-decoration: line-through; color: rgba(255, 0, 0, 0.763); font-size: 35px; display: inline-block; margin-bottom:5px;">{{ $item->product_price }}JOD</span>
                                 <span style="font-size: 25px" >{{ $price }}JOD</span>
-                                <span style="margin-left: 20px; display: inline-block;" class="discount-circle">{{$dis}}%</span>
+                                <span style="margin-left: 20px;  position: relative;
+                                bottom: 400px; right:15px" class="discount-circle">{{$dis}}%</span>
                             </p>
                             
 							
