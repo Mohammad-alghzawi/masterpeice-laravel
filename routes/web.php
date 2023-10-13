@@ -4,6 +4,7 @@
 
 use App\Http\Controllers\AboutusController;
 use App\Http\Controllers\LoginAdminController;
+use App\Http\Controllers\LoginDash;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\VendorController;
@@ -63,6 +64,10 @@ Route::resource('/dash',DashController::class);
 Route::resource('/profileAdmin',ProfileDashController::class);
 Route::resource('/vendor',VendorrController::class);
 Route::resource('/discount',DiscountController::class);
+// -------logindash--------
+Route::get('/logindash',[LoginDash::class,'login']);
+Route::post('/logindashboard',[LoginDash::class,'logindash'])->name('dash');
+
 
 
 

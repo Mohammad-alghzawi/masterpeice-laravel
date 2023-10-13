@@ -12,9 +12,30 @@ class LoginDash extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function login()
     {
-        //
+        return view('dash.login');
+    }
+    public function logindash(Request $request)
+    {
+        $request->validate([
+            'email'=>'required',
+            'password'=>'required|min:5|max:12'
+
+        ]);
+        $admin=Admin::Where('email',"=",$request->email)->first();
+        if($admin){
+            if(Hash::check($request->password,$admin->password)){
+$request->session()->put('loginId',$admin->id);
+return redirect();
+            }else{
+                return back()->with('fail','password not matches ');
+
+            }
+
+        }else{
+            return back()->with('fail','This email is not registered');
+        }
     }
 
     /**
