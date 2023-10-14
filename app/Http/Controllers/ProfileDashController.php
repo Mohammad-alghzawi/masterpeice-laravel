@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use Session;
 
 class ProfileDashController extends Controller
 {
@@ -14,8 +15,12 @@ class ProfileDashController extends Controller
      */
     public function index()
     {
-        $profiledash = Admin::all();
-        return view('dash.profile.index', compact('profiledash'));
+        $value = Session::get('loginId');
+        if((Session::has('loginId')) ){
+            $profiledash = Admin::find( $value);
+            return view('dash.profile.index', compact('profiledash'));
+        }
+        
     }
 
     /**
@@ -23,9 +28,13 @@ class ProfileDashController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function image()
     {
-        //
+        // $value = Session::get('loginId');
+        // if((Session::has('loginId')) ){
+        //     $image = Admin::find( $value);
+        //     return view('dash.master', compact('image'));
+        // }
     }
 
     /**

@@ -27,7 +27,11 @@ class User extends Authenticatable
     ];
     public function checkout()
     {
-        return $this->belongsTo(Checkout::class, 'user_id');
+        return $this->hasMany(Checkout::class, 'user_id');
+    }
+    public function cart ()
+    {
+        return $this->hasMany(Cart::class, 'cart_id');
     }
     
 

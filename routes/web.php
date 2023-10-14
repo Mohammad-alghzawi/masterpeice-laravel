@@ -56,17 +56,20 @@ require __DIR__.'/auth.php';
 
 
 //-----------DASHBOARD---------
-Route::resource('/category',CategoryContoller::class);
-Route::resource('/product',ProductController::class);
-Route::resource('/users',UserController::class);
-Route::resource('/admin',AdminController::class);
-Route::resource('/dash',DashController::class);
-Route::resource('/profileAdmin',ProfileDashController::class);
-Route::resource('/vendor',VendorrController::class);
-Route::resource('/discount',DiscountController::class);
+Route::resource('/category',CategoryContoller::class)->middleware('isLoggedIn');
+Route::resource('/product',ProductController::class)->middleware('isLoggedIn');
+Route::resource('/users',UserController::class)->middleware('isLoggedIn');
+Route::resource('/admin',AdminController::class)->middleware('isLoggedIn');
+Route::resource('/dash',DashController::class)->middleware('isLoggedIn');
+Route::resource('/profileAdmin',ProfileDashController::class)->middleware('isLoggedIn');
+// Route::get('/image',[ProfileDashController::class,'image']);
+Route::resource('/vendor',VendorrController::class)->middleware('isLoggedIn');
+Route::resource('/discount',DiscountController::class)->middleware('isLoggedIn');
 // -------logindash--------
-Route::get('/logindash',[LoginDash::class,'login']);
+Route::get('/logindash',[LoginDash::class,'login'])->name('logindash')->middleware('alreadyLoggedIn');
 Route::post('/logindashboard',[LoginDash::class,'logindash'])->name('dash');
+Route::get('/dashboard',[LoginDash::class,'dashboard'])->middleware('isLoggedIn');
+Route::get('/logout',[LoginDash::class,'logout'])->name('logoutt');
 
 
 

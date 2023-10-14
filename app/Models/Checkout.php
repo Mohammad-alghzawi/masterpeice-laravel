@@ -23,6 +23,8 @@ class Checkout extends Model
 
     public function carts()
     {
-        return $this->hasMany(Cart::class, 'checkout_id');
+        return $this->belongsTo(Cart::class, 'cart_id');
     }
+
+    
 }

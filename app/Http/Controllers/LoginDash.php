@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use Session;
+use Hash;
 
 class LoginDash extends Controller
 {
@@ -19,22 +21,36 @@ class LoginDash extends Controller
     public function logindash(Request $request)
     {
         $request->validate([
-            'email'=>'required',
-            'password'=>'required|min:5|max:12'
+            'email' => 'required',
+            'password' => 'required|min:5|max:12'
 
         ]);
-        $admin=Admin::Where('email',"=",$request->email)->first();
-        if($admin){
-            if(Hash::check($request->password,$admin->password)){
-$request->session()->put('loginId',$admin->id);
-return redirect();
-            }else{
-                return back()->with('fail','password not matches ');
+        $admin = Admin::Where('email', "=", $request->email)->first();
+        if ($admin) {
+            if (Hash::check($request->password, $admin->password)) {
+                $request->Session()->put('loginId', $admin->id);
+                
+                return redirect('dashboard');
+            } else {
+                return back()->with('fail', 'password not matches ');
 
             }
 
-        }else{
-            return back()->with('fail','This email is not registered');
+        } else {
+            return back()->with('fail', 'This email is not registered');
+        }
+
+    }
+    public function dashboard()
+    {
+
+        return view('dash.home');
+    }
+    public function logout()
+    {
+        if (Session::has('loginId')) {
+            Session::pull('loginId');
+            return redirect()->route('logindash');
         }
     }
 

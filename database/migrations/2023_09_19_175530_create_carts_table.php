@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('checkout_id');
-            $table->foreign('checkout_id')->references('id')->on('checkouts');
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->integer('quantity');
+            $table->float('total_price');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+           
+            
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();

@@ -194,7 +194,7 @@
                                             </div>
                                            
                                         </div>
-                                        <h2 class="vd_mane">Vicent George</h2>
+                                        <h2 class="vd_mane">mohammad</h2>
                                         <span class="vd_mail"><a href="#!">vicentgeorg@gmail.com</a></span>
                                       
                                     </div>
@@ -270,7 +270,7 @@
                                     </li>
                                     
                                     <li>
-                                        <a href="#">Logout</a>
+                                        <a href="{{route('logoutt')}}">Logout</a>
                                     </li>
                                 </ul>
 
