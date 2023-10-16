@@ -14,7 +14,32 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $cart = [];
+        $total_price = 0;
+        if (auth()->user()) {
+            $user = auth()->user();
+
+            $cart = Cart::where('user_id', $user->id)->with('product')->get();
+            foreach ($cart as $item) {
+                $total_price += $item->product->product_price * $item->quantity;
+            }
+            // $cartCount = count($cart);
+            // Now, $cartCount contains the count of items in the cart
+        } else {
+
+            $cart = session('cart') ?? [];
+
+            if ($cart) {
+                foreach ($cart as $item) {
+                    $total_price += $item['price'];
+                }
+            }
+        }
+
+
+
+
+        return view('pages.cart', compact('cart', 'total_price'));
     }
 
     /**

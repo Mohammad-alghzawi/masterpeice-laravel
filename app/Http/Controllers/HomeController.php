@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Vendor;
 use App\Models\Product;
-
+use App\Models\Checkout;
 class HomeController extends Controller
 {
     /**

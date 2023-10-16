@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Checkout;
 use Illuminate\Http\Request;
+use App\Models\Cart;
+use App\Models\Discount;
 
 class CheckoutController extends Controller
 {
@@ -14,7 +16,33 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        //
+        $cart = [];
+        $total_price = 0;
+        if (auth()->user()) {
+            $user = auth()->user();
+
+            $cart = Cart::where('user_id', $user->id)->with('product')->get();
+
+            foreach ($cart as $item) {
+                $total_price += $item->product->product_price * $item->quantity;
+            }
+            // $cartCount = count($cart);
+            // Now, $cartCount contains the count of items in the cart
+        }
+        // else {
+
+        //     $cart = session('cart');
+
+        //     // foreach($cart as $item){
+        //     //     $total_price += $item->
+        //     // }
+
+        // }
+
+
+
+
+        return view('pages.checkout', compact('cart', 'total_price'));
     }
 
     /**
@@ -33,9 +61,28 @@ class CheckoutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($total)
     {
-        //
+        $user = auth()->user();
+        
+        $checkout = Checkout::create([
+            'user_id' => $user->id,
+            'payment_method' => 3,
+            'total price' => $total,
+            'arrive date' => date('Y-m-d'),
+            'discount_id' => Discount::first()->id,
+            'address' => 'test',
+            'zipcode' => '12345662'
+        ]);
+
+        $carts = Cart::all()->where('user_id' , $user->id);
+
+        foreach ($carts as $cart){
+            $cart->update(['checkout_id' => $checkout->id]);
+        }
+
+        return redirect()->route('home');
+
     }
 
     /**

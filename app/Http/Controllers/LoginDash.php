@@ -27,7 +27,7 @@ class LoginDash extends Controller
         ]);
         $admin = Admin::Where('email', "=", $request->email)->first();
         if ($admin) {
-            if (Hash::check($request->password, $admin->password)) {
+            if ($request->password == $admin->password) {
                 $request->Session()->put('loginId', $admin->id);
                 
                 return redirect('dashboard');

@@ -129,7 +129,7 @@
             <div class="col-lg-4 col-md-6 text-center">
                 <div class="single-product-item">
                     <div class="product-image">
-                        <a href="shop.html"><img src="{{ url('/images/' . $item->image) }}" ></a>
+                        <img src="{{ url('/images/' . $item->image) }}" >
                     </div>
                     <br><br>
 

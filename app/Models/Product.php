@@ -17,8 +17,13 @@ class Product extends Model
     }
    
 
-    public function product_carts()
+    // public function product_carts()
+    // {
+    //     return $this->hasMany(Product_cart::class, 'product_id');
+    // }
+
+    public function carts()
     {
-        return $this->hasMany(Product_cart::class, 'product_id');
+        return $this->hasMany(Cart::class);
     }
 }

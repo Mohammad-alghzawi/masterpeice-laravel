@@ -89,20 +89,28 @@
                                 </li> --}}
                                 <li>
                                     @if (Auth::check())
-									<div style="display: flex; align-items: center;">
-										<a href="{{ route('profile.edit', [Auth::user()]) }}" style="margin-right: 10px;" class="nav-item nav-link nav-sticky profilee ">{{ Auth::user()->name }}</a>
-										<form method="POST" style="margin-right: 10px;" class="nav-item nav-link nav-sticky header-icons" action="{{ route('logout') }}">
-											@csrf
-											<a href="./login-signup.html" onclick="event.preventDefault(); this.closest('form').submit();" ><button class="button-nav">Logout</button></a>
-										</form>
-									</div>
-									
-											
+                                        <div style="display: flex; align-items: center;">
+                                            <a href="{{ route('profile.edit', [Auth::user()]) }}"
+                                                style="margin-right: 10px;"
+                                                class="nav-item nav-link nav-sticky profilee ">{{ Auth::user()->name }}</a>
+                                            <form method="POST" style="margin-right: 10px;"
+                                                class="nav-item nav-link nav-sticky header-icons"
+                                                action="{{ route('logout') }}">
+                                                @csrf
+                                                <a href="./login-signup.html"
+                                                    onclick="event.preventDefault(); this.closest('form').submit();"><button
+                                                        class="button-nav">Logout</button></a>
+                                                <a class="shopping-cart" href="{{ route('cartt') }}"><i
+                                                        class="fas fa-shopping-cart"></i></a>
+                                            </form>
+                                        </div>
                                     @else
                                         {{-- <a href="/login" class="nav-item nav-link nav-sticky">Login</a> --}}
-										<a href="/login"><button class="button-nav">Login</button></a>
-										<a href="/register"><button class="button-nav">Register</button></a>
+                                        <a href="/login"><button class="button-nav">Login</button></a>
+                                        <a href="/register"><button class="button-nav">Register</button></a>
                                         {{-- <a href="/register" class="nav-item nav-link nav-sticky">Register</a> --}}
+                                        <a class="shopping-cart" href="{{ route('cartt') }}"><i
+                                                class="fas fa-shopping-cart"></i></a>
                                     @endif
                                 </li>
                             </ul>

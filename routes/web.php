@@ -3,7 +3,7 @@
 
 
 use App\Http\Controllers\AboutusController;
-use App\Http\Controllers\LoginAdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginDash;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
@@ -19,6 +19,9 @@ use App\Http\Controllers\VendorrController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\ContactusController;
+use App\Http\Controllers\CheckoutController;
+
+
 
 
 
@@ -85,3 +88,11 @@ Route::get('/aboutus',[AboutusController::class,'index'])->name('about');
 Route::get('/contactus',[ContactusController::class,'index'])->name('contact');
 Route::get('/shop/{id}',[ShopController::class,'index'])->name('allproduct');
 Route::get('/detail/{id}',[ShopController::class,'singleproduct'])->name('productdetail');
+// ----------cart-------
+Route::post('/detail/add/{idcart}',[ShopController::class,'addtocart'])->name('addcart');
+Route::get('/cart', [CartController::class, 'index'])->name('cartt');
+
+// -------checkout-------
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('showcheckout')->middleware('auth','verified');
+Route::get('/checkout/create/{total_price}', [CheckoutController::class, 'store'])->name('checkout');
+

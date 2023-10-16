@@ -55,12 +55,14 @@
 						<p class="single-product-pricing"><span></span>{{$price}}JOD</p>
 						<p>{{$item->product_description}}</p><br>
 						<div class="single-product-form">
-							<form action="index.html">
-								{{-- <input type="number" placeholder="0"> --}}
-								<h5>Remaining amount: <span style="color: orange">{{$item->product_quantity}}</span></h5>
+							<form action="{{ route('addcart', ['idcart' => $item->id]) }}" method="POST">
+								@csrf
+								<input type="number" name="quantity" placeholder="0">
+							<button type="submit"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+
 							</form><br><br>
-							<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-							
+							<h5>Remaining amount: <span style="color: orange">{{$item->product_quantity}}</span></h5>
+
 						</div>
 					
 					</div>

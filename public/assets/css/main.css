@@ -2975,6 +2975,7 @@ table.order-details thead tr th {
 table.order-details tbody td {
   border: 1px solid #efefef;
   padding: 15px;
+  background-color: rgb(128, 128, 128);
 }
 
 .order-details-wrap > a {

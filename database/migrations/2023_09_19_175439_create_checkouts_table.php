@@ -18,8 +18,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('cart_id');
-            $table->foreign('cart_id')->references('id')->on('carts');
             $table->boolean('payment_method');
             $table->float('total price');
             $table->date('arrive date');

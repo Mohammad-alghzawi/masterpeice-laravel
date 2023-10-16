@@ -41,7 +41,7 @@ class AdminController extends Controller
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->phone = $request->phone;
-        $admin->password =Hash::make($request->password);
+        $admin->password =$request->password;
        
 
         if ($request->hasFile('avatar')) {

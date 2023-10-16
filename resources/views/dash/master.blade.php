@@ -189,13 +189,13 @@
                                     <div class="vd_info_wrap text-center">
                                         <div class="vd_image">
                                             <div class="image_wrap">
-                                                <img src={{ asset('assets/images/meta/meta1.png') }}
+                                                <img style="height:160px" src={{ asset('assets/img/sereen-removebg-preview.png') }}
                                                     alt="image_not_found">
                                             </div>
                                            
                                         </div>
-                                        <h2 class="vd_mane">mohammad</h2>
-                                        <span class="vd_mail"><a href="#!">vicentgeorg@gmail.com</a></span>
+                                        {{-- <h2 class="vd_mane">mohammad</h2>
+                                        <span class="vd_mail"><a href="#!">vicentgeorg@gmail.com</a></span> --}}
                                       
                                     </div>
                                 </div>

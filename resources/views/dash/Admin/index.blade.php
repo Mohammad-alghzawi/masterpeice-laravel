@@ -27,7 +27,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Password</th>
+                                {{-- <th>Password</th> --}}
                                
                               
                                 <th>Delete</th>
@@ -43,7 +43,7 @@
                                     <td>{{ $item->name}}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->phone }}</td>
-                                    <td>{{ $item->password}}</td>
+                                    {{-- <td>{{ $item->password}}</td> --}}
                                     
                                     
                                         {{-- <select>
