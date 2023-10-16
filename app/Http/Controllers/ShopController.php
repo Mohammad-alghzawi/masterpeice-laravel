@@ -17,112 +17,113 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   
-    
+
+
     public function index($id)
     {
         $vendors = Vendor::all();
         $products = Product::where('category_id', $id)->paginate(6);
         // dd($id);
-        $discount= Category::where('id',$id)->get();
-       $dis=(($discount[0]->discount));
-    $productdetail = Product::find($id);
-    // dd($productdetail);
+        $discount = Category::where('id', $id)->get();
+        $dis = (($discount[0]->discount));
+        $productdetail = Product::find($id);
+        // dd($productdetail);
 
-    $prices=$productdetail->product_price;
-    // dd($prices);
-    $price=$prices* $dis;
+        $prices = $productdetail->product_price;
+        // dd($prices);
+        $price = $prices * $dis;
         // dd($discount[0]->discount);
-       $dis=(($discount[0]->discount)*100);
-    
-        return view('pages.shop', compact('vendors', 'products','dis','price'));
+        $dis = (($discount[0]->discount) * 100);
+
+        return view('pages.shop', compact('vendors', 'products', 'dis', 'price'));
 
     }
     public function singleproduct($id)
-
     {
 
         $vendors = Vendor::all();
-        $cat_id=Product::find($id);
+        $cat_id = Product::find($id);
 
-        $discount= Category::where('id',$cat_id->category_id)->get();
+        $discount = Category::where('id', $cat_id->category_id)->get();
         // dd($discount);
-       $dis=(($discount[0]->discount));
-    //    dd($dis);
+        $dis = (($discount[0]->discount));
+        //    dd($dis);
 
         $productdetail = Product::find($id);
         // dd($productdetail);
 
-        $prices=$productdetail->product_price;
+        $prices = $productdetail->product_price;
         // dd($prices);
-        $price=$prices* $dis;
-        
+        $price = $prices * $dis;
+
         // dd('$dis',$dis,'$price',$price);
         $productdetails = collect([$productdetail]);
         $relatedProducts = Product::where('category_id', $productdetail->category_id)
-    ->where('id', '<>', $id)
-    ->inRandomOrder()
-    ->take(3) 
-    ->get();
+            ->where('id', '<>', $id)
+            ->inRandomOrder()
+            ->take(3)
+            ->get();
 
-        return view('pages.single', compact('productdetails','relatedProducts','vendors','price'));
+        return view('pages.single', compact('productdetails', 'relatedProducts', 'vendors', 'price'));
     }
 
 
-    public function addtocart(Request $request,$id){
+    public function addtocart(Request $request, $id)
+    {
         $product = Product::find($id);
-    $quantity1 = $request->quantity;
+        $quantity1 = $request->quantity;
 
-    if (Auth::check()) {
+        if (Auth::check()) {
 
-        // $user = Auth::user();
-        $iduser = auth()->user()->id;
-        $productId = $product->id;
-        $quantity = $request->quantity;
+            // $user = Auth::user();
+            $iduser = auth()->user()->id;
+            $productId = $product->id;
+            $quantity = $request->quantity;
 
-        // Check if the product already exists in the cart
-        $existingCart = Cart::where('user_id', $iduser)
-            ->where('product_id', $productId)
-            ->first();
+            // Check if the product already exists in the cart
+            $existingCart = Cart::where('user_id', $iduser)
+                ->where('product_id', $productId)
+                ->first();
 
-        if ($existingCart) {
-            // Product already exists in the cart, so increment the quantity
-            $existingCart->update([
-                'quantity' =>$existingCart->quantity + $quantity
-            ]);
+            if ($existingCart) {
+                // Product already exists in the cart, so increment the quantity
+                $existingCart->update([
+                    'quantity' => $existingCart->quantity + $quantity
+                ]);
+            } else {
+                // Product does not exist in the cart, so create a new record
+                Cart::create([
+                    'user_id' => $iduser,
+                    'product_id' => $productId,
+                    'quantity' => $quantity,
+                    'checkout_id' => Checkout::first()->id
+                ]);
+            }
+
+            return redirect()->back()->with('success', 'Product added to the cart successfully');
         } else {
-            // Product does not exist in the cart, so create a new record
-            Cart::create([
-                'user_id' => $iduser,
-                'product_id' => $productId,
-                'quantity' => $quantity,
-                'checkout_id' => Checkout::first()->id
-            ]);
+            $cart = session()->get('cart', []);
+
+            if (isset($cart[$id])) {
+                $cart[$id]['quantity'] += $quantity1;
+            } else {
+                $cart[$id] = [
+                    'id' => $product->id,
+                    'image1' => $product->product_image,
+                    'Name' => $product->product_name,
+                    'quantity' => $quantity1,
+                    'price' => $request->priceAfterDiscount,
+                    'product_category_id' => $product->category_id,
+                ];
+            }
+
+            session()->put('cart', $cart);
+            // dd($cart);
+
+            return redirect()->back()->with('success', 'Product added to the cart successfully');
         }
-
-        return redirect()->back()->with('success', 'Product added to the cart successfully');
-    } else {
-        $cart = session()->get('cart', []);
-
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity'] += $quantity1;
-        } else {
-            $cart[$id] = [
-                'id' => $product->id,
-                'image1' => $product->product_image,
-                'Name' => $product->product_name,
-                'quantity' => $quantity1,
-                'price' => $product->product_price,
-            ];
-        }
-
-        session()->put('cart', $cart);
-        // dd($cart);
-
-        return redirect()->back()->with('success', 'Product added to the cart successfully');
     }
-    }
-    
+
 
 
 

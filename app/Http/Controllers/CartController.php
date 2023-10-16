@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -21,7 +22,8 @@ class CartController extends Controller
 
             $cart = Cart::where('user_id', $user->id)->with('product')->get();
             foreach ($cart as $item) {
-                $total_price += $item->product->product_price * $item->quantity;
+                $discount = Category::where('id', $item->product->category_id)->get()->first()->discount;
+                $total_price += $item->product->product_price * $item->quantity * $discount;
             }
             // $cartCount = count($cart);
             // Now, $cartCount contains the count of items in the cart
@@ -31,7 +33,7 @@ class CartController extends Controller
 
             if ($cart) {
                 foreach ($cart as $item) {
-                    $total_price += $item['price'];
+                    $total_price += $item['price'] * $item['quantity'];
                 }
             }
         }

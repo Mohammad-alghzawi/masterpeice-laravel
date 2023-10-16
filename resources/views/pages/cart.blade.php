@@ -48,11 +48,22 @@
                                     <th class="product-name">Name</th>
                                     <th class="product-price">Price</th>
                                     <th class="product-quantity">Quantity</th>
-                                   
+
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($cart as $item)
+                                    @php
+                                        if (isset($item->product)) {
+                                            $discount = App\Models\Category::where('id', $item->product->category_id)
+                                                ->get()
+                                                ->first()->discount;
+                                        } else {
+                                            $discount = App\Models\Category::where('id', $item['product_category_id'])
+                                                ->get()
+                                                ->first()->discount;
+                                        }
+                                    @endphp
                                     <tr class="table-body-row">
                                         <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a>
                                         </td>
@@ -62,12 +73,12 @@
                                         <td class="product-name">
                                             {{ isset($item->product) ? $item->product->product_name : $item['Name'] }}</td>
                                         <td class="product-price">JOD
-                                            {{ isset($item->product) ? $item->product->product_price * $item->quantity : $item['price'] * $item['quantity'] }}
+                                            {{ isset($item->product) ? $item->product->product_price * $item->quantity * $discount : $item['price'] * $item['quantity'] }}
                                         </td>
                                         <td class="product-quantity"><input type="number" placeholder="0"
                                                 value="{{ isset($item->product) ? $item->quantity : $item['quantity'] }}">
                                         </td>
-                                       
+
                                     </tr>
                                 @endforeach
 
@@ -94,7 +105,7 @@
                         </table>
                         <div class="cart-buttons">
 
-                            <a href="{{route('showcheckout')}}" class="boxed-btn black">Check Out</a>
+                            <a href="{{ route('showcheckout') }}" class="boxed-btn black">Check Out</a>
                         </div>
                     </div>
 

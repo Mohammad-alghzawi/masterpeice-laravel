@@ -6,6 +6,7 @@ use App\Models\Checkout;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Discount;
+use App\Models\Category;
 
 class CheckoutController extends Controller
 {
@@ -24,7 +25,10 @@ class CheckoutController extends Controller
             $cart = Cart::where('user_id', $user->id)->with('product')->get();
 
             foreach ($cart as $item) {
-                $total_price += $item->product->product_price * $item->quantity;
+                $discount = Category::where('id', $item->product->category_id)
+                    ->get()
+                    ->first()->discount;
+                $total_price += $item->product->product_price * $item->quantity * $discount;
             }
             // $cartCount = count($cart);
             // Now, $cartCount contains the count of items in the cart
@@ -64,7 +68,7 @@ class CheckoutController extends Controller
     public function store($total)
     {
         $user = auth()->user();
-        
+
         $checkout = Checkout::create([
             'user_id' => $user->id,
             'payment_method' => 3,
@@ -75,9 +79,15 @@ class CheckoutController extends Controller
             'zipcode' => '12345662'
         ]);
 
-        $carts = Cart::all()->where('user_id' , $user->id);
-
-        foreach ($carts as $cart){
+        $carts = Cart::all()->where('user_id', $user->id);
+        // ---------for remaining amount----
+        foreach ($carts as $cart) {
+            $product = $cart->product;
+            $product->product_quantity -= $cart->quantity;
+            $product->save();
+        }
+        // --------- end for remaining amount----
+        foreach ($carts as $cart) {
             $cart->update(['checkout_id' => $checkout->id]);
         }
 

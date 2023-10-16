@@ -40,7 +40,8 @@ class AuthenticatedSessionController extends Controller
                     'user_id' => auth()->user()->id,
                     'product_id' => $item['id'],
                     'quantity' => $item['quantity'],
-                    'checkout_id' => Checkout::first()->id
+                    'checkout_id' => Checkout::first()->id,
+                    'price' => $item['price'] * $item['quantity'],
                 ]);
             }
         }

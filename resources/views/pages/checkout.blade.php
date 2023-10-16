@@ -134,55 +134,67 @@
                     </div>
 
                 </div>
-            <div class="col-lg-4">
-                <div class="cart-section mt-150 mb-150">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-8 col-md-12">
-                                <div class="cart-table-wrap">
-                                    <table class="cart-table">
-                                        <thead class="cart-table-head">
-                                            <tr class="table-head-row">
-            
-                                                <th class="product-image">Product Image</th>
-                                                <th class="product-name">Name</th>
-                                                <th class="product-price">Price</th>
-                                                <th class="product-quantity">Quantity</th>
-            
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($cart as $item)
-                                                <tr class="table-body-row">
-            
-                                                    <td class="product-image"><img
-                                                            src="{{ asset('images/' . (isset($item->product) ? $item->product->product_image : $item['image1'])) }}"
-                                                            alt=""></td>
-                                                    <td class="product-name">
-                                                        {{ isset($item->product) ? $item->product->product_name : $item['Name'] }}</td>
-                                                    <td class="product-price">JOD
-                                                        {{ isset($item->product) ? $item->product->product_price * $item->quantity : $item['price'] * $item['quantity'] }}
-                                                    </td>
-                                                    <td class="product-quantity">
-                                                        {{ $item->quantity }}
-                                                    </td>
-            
+                <div class="col-lg-4">
+                    <div class="cart-section mt-150 mb-150">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-12">
+                                    <div class="cart-table-wrap">
+                                        <table class="cart-table">
+                                            <thead class="cart-table-head">
+                                                <tr class="table-head-row">
+
+                                                    <th class="product-image">Product Image</th>
+                                                    <th class="product-name">Name</th>
+                                                    <th class="product-price">Price</th>
+                                                    <th class="product-quantity">Quantity</th>
+
                                                 </tr>
-                                            @endforeach
-            
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($cart as $item)
+                                                    @php
+                                                        if (isset($item->product)) {
+                                                            $discount = App\Models\Category::where('id', $item->product->category_id)
+                                                                ->get()
+                                                                ->first()->discount;
+                                                        } else {
+                                                            $discount = App\Models\Category::where('id', $item['product_category_id'])
+                                                                ->get()
+                                                                ->first()->discount;
+                                                        }
+                                                    @endphp
+                                                    <tr class="table-body-row">
+
+                                                        <td class="product-image"><img
+                                                                src="{{ asset('images/' . (isset($item->product) ? $item->product->product_image : $item['image1'])) }}"
+                                                                alt=""></td>
+                                                        <td class="product-name">
+                                                            {{ isset($item->product) ? $item->product->product_name : $item['Name'] }}
+                                                        </td>
+                                                        <td class="product-price">JOD
+                                                            {{ isset($item->product) ? $item->product->product_price * $item->quantity * $discount : $item['price'] * $item['quantity'] * $discount }}
+                                                        </td>
+                                                        <td class="product-quantity">
+                                                            {{ $item->quantity }}
+                                                        </td>
+
+                                                    </tr>
+                                                @endforeach
+
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
             </div>
         </div>
     </div>
-    
+
 
 
 
