@@ -20,7 +20,7 @@ class CartController extends Controller
         if (auth()->user()) {
             $user = auth()->user();
 
-            $cart = Cart::where('user_id', $user->id)->with('product')->get();
+            $cart = Cart::where('user_id', $user->id)->where('checkout_id', '<', 2)->with('product')->get();
             foreach ($cart as $item) {
                 $discount = Category::where('id', $item->product->category_id)->get()->first()->discount;
                 $total_price += $item->product->product_price * $item->quantity * $discount;

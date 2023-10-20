@@ -22,7 +22,7 @@ class CheckoutController extends Controller
         if (auth()->user()) {
             $user = auth()->user();
 
-            $cart = Cart::where('user_id', $user->id)->with('product')->get();
+            $cart = Cart::where('user_id', $user->id)->where('checkout_id', '<', 2)->with('product')->get();
 
             foreach ($cart as $item) {
                 $discount = Category::where('id', $item->product->category_id)
@@ -79,7 +79,7 @@ class CheckoutController extends Controller
             'zipcode' => '12345662'
         ]);
 
-        $carts = Cart::all()->where('user_id', $user->id);
+        $carts = Cart::all()->where('user_id', $user->id)->where('checkout_id', '<', 2);
         // ---------for remaining amount----
         foreach ($carts as $cart) {
             $product = $cart->product;

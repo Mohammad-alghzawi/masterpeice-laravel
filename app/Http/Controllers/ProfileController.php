@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Cart;
+use App\Models\Checkout;
 
 class ProfileController extends Controller
 {
@@ -16,9 +18,24 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $user = Auth::user();
+        $products = [];
+        $checkouts = Checkout::where("user_id", $user->id)->where('id', '>', 1)->get();
+        
+        foreach ($checkouts as $checkout) {
+            $carts = Cart::where('checkout_id', $checkout->id)->get();
+            foreach ($carts as $cart) {
+                array_push($products, [$checkout->id => $cart->product->product_name]);
+            }
+        }
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $user,
+            'products' => $products,
+            'checkouts' => $checkouts,
         ]);
+        // return view('profile.edit', [
+        //     'user' => $user,
+        // ]->with('products', $products))->with('checkouts',$checkouts);
     }
 
     /**

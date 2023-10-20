@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
 
         $sessionCart = session('cart');
         if ($sessionCart != null) {
-            Cart::where('user_id', auth()->user()->id)->delete();
+            //Cart::where('user_id', auth()->user()->id)->delete();
             foreach ($sessionCart as $item) {
                 Cart::create([
                     'user_id' => auth()->user()->id,

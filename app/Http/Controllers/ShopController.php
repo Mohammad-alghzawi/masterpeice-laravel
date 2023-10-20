@@ -85,7 +85,7 @@ class ShopController extends Controller
                 ->where('product_id', $productId)
                 ->first();
 
-            if ($existingCart) {
+            if ($existingCart && $existingCart->checkout_id == 1) {
                 // Product already exists in the cart, so increment the quantity
                 $existingCart->update([
                     'quantity' => $existingCart->quantity + $quantity

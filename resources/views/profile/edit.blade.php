@@ -38,30 +38,28 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Order Number</th>
-                                        <th scope="col">Order Address</th>
-                                        <th scope="col">Order Status</th>
+                                        <th scope="col">Order Date</th>
+                                        <th scope="col">Order Products</th>
                                         <th scope="col">Order Total Price</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Irbid</td>
-                                        <td>Irbid</td>
-                                        <td>25 JOD</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Irbid</td>
-                                        <td>Irbid</td>
-                                        <td>35 JOD</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Irbid</td>
-                                        <td>Irbid</td>
-                                        <td>30 JOD</td>
-                                    </tr>
+                                    @foreach ($checkouts as $checkout)
+                                        <tr>
+                                            <th scope="row">{{ $checkout->id }}</th>
+                                            <td>{{ $checkout->created_at }}</td>
+                                            <td>
+                                                @foreach ($products as $product)
+                                                    @foreach ($product as $index => $value)
+                                                        @if ($checkout->id == $index)
+                                                            {{ $value }} <br/>
+                                                        @endif
+                                                    @endforeach
+                                                @endforeach
+                                            </td>
+                                            <td>{{ $checkout['total price'] }}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
