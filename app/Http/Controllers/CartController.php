@@ -94,9 +94,34 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cart $cart)
+    public function update(Request $request, $id)
     {
-        //
+
+        $updatedQuantity = $request->input('quantity');
+
+        if (auth()->user()) {
+
+            $user = auth()->user();
+            $cartItem = Cart::where('user_id', $user->id)->where('product_id', $id)->first();
+
+            if ($cartItem) {
+                $cartItem->update(['quantity' => $updatedQuantity]);
+            }
+        } else {
+
+            $cart = session('cart');
+            if ($cart !== null) {
+                foreach ($cart as $key => $item) {
+                    if ($item['id'] == $id) {
+                        $cart[$key]['quantity'] = $updatedQuantity;
+                        session(['cart' => $cart]);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return redirect()->back()->with('success', 'تمت إضافة المنتج إلى سلة التسوق بنجاح');
     }
 
     /**
@@ -105,8 +130,26 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cart $cart)
+    public function destroy($id)
     {
-        //
+        if (auth()->user()) {
+            // If the user is authenticated, delete the item from the database
+            $user = auth()->user();
+            Cart::where('user_id', $user->id)->where('product_id', $id)->delete();
+        } else {
+            // If the user is not authenticated, delete the item from the session
+            $cart = session('cart');
+            if ($cart !== null) {
+                foreach ($cart as $key => $item) {
+                    if ($item['id'] == $id) {
+                        unset($cart[$key]);
+                        session(['cart' => $cart]);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return redirect()->back()->with('success', 'Product added to the cart successfully');
     }
 }

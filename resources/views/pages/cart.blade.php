@@ -65,8 +65,14 @@
                                         }
                                     @endphp
                                     <tr class="table-body-row">
-                                        <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a>
-                                        </td>
+                                        <td><form method="POST" action="{{ route('deletecart', isset($item->product) ? $item->product->id : $item['id']) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger delete-product">Delete</button>
+                                        </form></td>
+                                        
+                                        {{-- <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a>
+                                        </td> --}}
                                         <td class="product-image"><img
                                                 src="{{ asset('images/' . (isset($item->product) ? $item->product->product_image : $item['image1'])) }}"
                                                 alt=""></td>
@@ -75,8 +81,21 @@
                                         <td class="product-price">JOD
                                             {{ isset($item->product) ? $item->product->product_price * $item->quantity * $discount : $item['price'] * $item['quantity'] }}
                                         </td>
-                                        <td class="product-quantity"><input type="number" placeholder="0"
-                                                value="{{ isset($item->product) ? $item->quantity : $item['quantity'] }}">
+                                        <td class="product-quantity"><form method="POST"
+                                            action="{{ route('updatecart', isset($item->product) ? $item->product->id : $item['id']) }}">
+                                            @csrf
+                                            @method('PATCH')
+
+
+
+                                            <input type="number" name="quantity" id="actionInput"
+                                                value="{{ isset($item->product) ? $item->quantity : $item['quantity'] }}"
+                                               
+                                             />
+
+                                            <button type="submit" class="btn btn-primary update-product"
+                                                hidden>Update</button>
+                                        </form>
                                         </td>
 
                                     </tr>

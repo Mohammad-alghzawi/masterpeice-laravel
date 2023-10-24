@@ -105,8 +105,24 @@
                                         alt=""></a>
                             </div>
                             <h3>{{ $item->product_name }}</h3>
-                            <p class="product-price"><span></span> {{ $item->product_price }} JOD </p>
-                            <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                            {{-- <p class="product-price"><span></span> {{ $item->product_price }} JOD </p> --}}
+                            <p class="product-price">
+                                <span style="text-decoration: line-through; color: rgba(255, 0, 0, 0.763); font-size: 35px; display: inline-block; margin-bottom:5px;">{{ $item->product_price }}JOD</span>
+                                @foreach ( $category as $items )
+                                @if ($items->id == $item->category_id)
+                                @php
+                                    $discount=$items->discount;
+                                @endphp
+                                    
+                                @endif
+                                    
+                                @endforeach
+                              <span style="font-size: 25px">{{ $item->product_price - ($item->product_price * $discount) }}JOD</span>
+
+                                <span style="margin-left: 20px;  position: relative;
+                                bottom: 400px; right:15px" class="discount-circle">{{$discount*100}}%</span>
+                            </p>
+                            <a href="{{ route('productdetail', ['id' => $item->id]) }}" class="cart-btn"><i class="fas fa-shopping-cart"></i>Read more</a>
                         </div>
                     </div>
                 @endforeach

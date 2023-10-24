@@ -63,8 +63,10 @@ class ShopController extends Controller
             ->inRandomOrder()
             ->take(3)
             ->get();
+            $category=Category::get();
+           
 
-        return view('pages.single', compact('productdetails', 'relatedProducts', 'vendors', 'price'));
+        return view('pages.single', compact('productdetails', 'relatedProducts', 'vendors', 'price','category'));
     }
 
 

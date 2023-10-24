@@ -91,6 +91,8 @@ Route::get('/detail/{id}',[ShopController::class,'singleproduct'])->name('produc
 // ----------cart-------
 Route::post('/detail/add/{idcart}',[ShopController::class,'addtocart'])->name('addcart');
 Route::get('/cart', [CartController::class, 'index'])->name('cartt');
+Route::delete('/deletecart/{id}', [CartController::class, 'destroy'])->name('deletecart');
+Route::patch('/updatecart/{id}', [CartController::class, 'update'])->name('updatecart');
 
 // -------checkout-------
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('showcheckout')->middleware('auth','verified');
