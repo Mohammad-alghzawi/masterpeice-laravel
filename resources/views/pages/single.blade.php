@@ -38,49 +38,45 @@
     <div class="single-product mt-150 mb-150">
         <div class="container">
             <div class="row">
-                @foreach ($productdetails as $item)
-                    @if (is_object($item))
                         <div class="col-md-5">
                             <div class="single-product-img">
-                                <img style="width: 300px;height:350px" src="{{ url('/images/' . $item->product_image) }}"
+                                <img style="width: 300px;height:350px" src="{{ url('/images/' . $product->product_image) }}"
                                     alt="">
                             </div>
                         </div>
                         <div class="col-md-7">
                             <div class="single-product-content">
-                                <h3> {{ $item->product_name }}</h3>
+                                <h3> {{ $product->product_name }}</h3>
                                 <p style="text-decoration: line-through; color: red;" class="single-product-pricing">
-                                    <span></span>{{ $item->product_price }} JOD
+                                    <span></span>{{ $product->product_price }} JOD
                                 </p>
 
-                                <p class="single-product-pricing"><span></span>{{ $price }}JOD</p>
-                                <p>{{ $item->product_description }}</p><br>
+                                <p class="single-product-pricing"><span></span>{{ $product->product_price - ($product->product_price * $discount / 100) }}JOD</p>
+                                <p>{{ $product->product_description }}</p><br>
                                 <div class="single-product-form">
-                                    <form action="{{ route('addcart', ['idcart' => $item->id]) }}" method="POST">
+                                    <form action="{{ route('addcart', ['idcart' => $product->id]) }}"  method="POST">
                                         @csrf
-                                        <input type="number" name="priceAfterDiscount" value={{ $price }} hidden>
-                                        @if ($item->product_quantity != 0)
+                                        <input type="hidden" name="priceAfterDiscount" value={{ $product->product_price - ($product->product_price * $discount / 100) }} hidden>
+                                        @if ($product->product_quantity != 0)
                                             <input type="number" name="quantity" value="1" min="1"
-                                                max="{{ $item->product_quantity }}">
-                                            <button type="submit"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                                                max="{{ $product->product_quantity }}">
+                                            <button class="button-nav"  type="submit"><i class="fas fa-shopping-cart  "></i> Add to Cart</button>
+                                            
                                         @else
+                                        
                                             <input type="number" name="quantity" value="0" min="1"
-                                                max="{{ $item->product_quantity }}">
+                                                max="{{ $product->product_quantity }}">
                                             <button type="submit" disabled><i class="fas fa-shopping-cart"></i> Sold
                                                 Out</button>
                                         @endif
                                     </form><br><br>
-                                    <h5>Remaining amount: <span style="color: orange">{{ $item->product_quantity }}</span>
+                                    <h5>Remaining amount: <span style="color: orange">{{ $product->product_quantity }}</span>
                                     </h5>
 
                                 </div>
 
                             </div>
                         </div>
-                    @else
-                        <p>No product data available.</p>
-                    @endif
-                @endforeach
             </div>
         </div>
     </div>
@@ -108,19 +104,11 @@
                             {{-- <p class="product-price"><span></span> {{ $item->product_price }} JOD </p> --}}
                             <p class="product-price">
                                 <span style="text-decoration: line-through; color: rgba(255, 0, 0, 0.763); font-size: 35px; display: inline-block; margin-bottom:5px;">{{ $item->product_price }}JOD</span>
-                                @foreach ( $category as $items )
-                                @if ($items->id == $item->category_id)
-                                @php
-                                    $discount=$items->discount;
-                                @endphp
-                                    
-                                @endif
-                                    
-                                @endforeach
-                              <span style="font-size: 25px">{{ $item->product_price - ($item->product_price * $discount) }}JOD</span>
+                              <span style="font-size: 25px">{{ $item->product_price - ($item->product_price * $discount / 100) }}JOD</span>
 
                                 <span style="margin-left: 20px;  position: relative;
-                                bottom: 400px; right:15px" class="discount-circle">{{$discount*100}}%</span>
+                                bottom: 400px; right:15px" class="discount-circle">{{$discount}}%
+                                </span>
                             </p>
                             <a href="{{ route('productdetail', ['id' => $item->id]) }}" class="cart-btn"><i class="fas fa-shopping-cart"></i>Read more</a>
                         </div>

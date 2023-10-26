@@ -73,7 +73,7 @@
                                         
                                         {{-- <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a>
                                         </td> --}}
-                                        <td class="product-image"><img
+                                        <td class="product-image"><img width="200px" height="200px"
                                                 src="{{ asset('images/' . (isset($item->product) ? $item->product->product_image : $item['image1'])) }}"
                                                 alt=""></td>
                                         <td class="product-name">

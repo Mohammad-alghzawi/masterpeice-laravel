@@ -132,8 +132,8 @@
                         <img src="{{ url('/images/' . $item->image) }}" >
                     </div>
                     <br><br>
-
-                    <a href="{{ route('allproduct', ['id' => $item->id]) }}" class="cart-btn">{{ $item->title }}</a>
+                    <h4>{{ $item->title }}</h4>
+                    <a href="{{ route('allproduct', $item->id) }}" class="cart-btn">Read more</a>
                 </div>
             </div>
 {{--             

@@ -63,142 +63,81 @@
                                                 <p><input type="text" placeholder="Address"></p>
                                                 <p><input type="tel" placeholder="Phone"></p>
                                             </form>
+                                            
                                         </div>
+                                        
                                     </div>
+                                    
                                 </div>
-                            </div>
-
-
-                            <div class="card single-accordion card">
-                                <div class="card-header" id="headingThree">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                            data-target="#collapseThree" aria-expanded="false"
-                                            aria-controls="collapseThree">
-                                            Card Details
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                                    data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <div class="card-details-form">
-                                            <div class="container p-0">
-                                                <div class="card px-4">
-                                                    <p class="h8 py-3">Visa</p>
-                                                    <div class="row gx-3">
-                                                        <div class="col-12">
-                                                            <div class="d-flex flex-column">
-                                                                <p class="text mb-1">Person Name</p>
-                                                                <input class="form-control mb-3" type="text"
-                                                                    placeholder="Name">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="d-flex flex-column">
-                                                                <p class="text mb-1">Card Number</p>
-                                                                <input class="form-control mb-3" type="text"
-                                                                    placeholder="Number">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="d-flex flex-column">
-                                                                <p class="text mb-1">Expiry</p>
-                                                                <input class="form-control mb-3" type="text"
-                                                                    placeholder="MM/YYYY">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="d-flex flex-column">
-                                                                <p class="text mb-1">CVV/CVC</p>
-                                                                <input class="form-control mb-3 pt-2 " type="password"
-                                                                    placeholder="***">
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div><br>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="col-lg-4">
-                    <div class="cart-section mt-150 mb-150">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-8 col-md-12">
-                                    <div class="cart-table-wrap">
-                                        <table class="cart-table">
-                                            <thead class="cart-table-head">
-                                                <tr class="table-head-row">
-
-                                                    <th class="product-image">Product Image</th>
-                                                    <th class="product-name">Name</th>
-                                                    <th class="product-price">Price</th>
-                                                    <th class="product-quantity">Quantity</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($cart as $item)
-                                                    @php
-                                                        if (isset($item->product)) {
-                                                            $discount = App\Models\Category::where('id', $item->product->category_id)
-                                                                ->get()
-                                                                ->first()->discount;
-                                                        } else {
-                                                            $discount = App\Models\Category::where('id', $item['product_category_id'])
-                                                                ->get()
-                                                                ->first()->discount;
-                                                        }
-                                                    @endphp
-                                                    <tr class="table-body-row">
-
-                                                        <td class="product-image"><img
-                                                                src="{{ asset('images/' . (isset($item->product) ? $item->product->product_image : $item['image1'])) }}"
-                                                                alt=""></td>
-                                                        <td class="product-name">
-                                                            {{ isset($item->product) ? $item->product->product_name : $item['Name'] }}
-                                                        </td>
-                                                        <td class="product-price">JOD
-                                                            {{ isset($item->product) ? $item->product->product_price * $item->quantity * $discount : $item['price'] * $item['quantity'] * $discount }}
-                                                        </td>
-                                                        <td class="product-quantity">
-                                                            {{ $item->quantity }}
-                                                        </td>
-
-                                                    </tr>
-                                                @endforeach
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
+                <img style="width:32%; " src="{{asset('assets/img/pay.jpg')}}" alt="image">
 
             </div>
         </div>
     </div>
 
 
+    <div class="col-lg-8 col-md-12">
+        <div class="cart-table-wrap">
+            <table style="margin-left:200px" class="cart-table">
+                <thead class="cart-table-head">
+                    <tr class="table-head-row">
+                        {{-- <th class="product-remove"></th> --}}
+                        <th class="product-image">Product Image</th>
+                        <th class="product-name">Name</th>
+                        <th class="product-price">Price</th>
+                        <th class="product-quantity">Quantity</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($cart as $item)
+                        @php
+                            if (isset($item->product)) {
+                                $discount = App\Models\Category::where('id', $item->product->category_id)
+                                    ->get()
+                                    ->first()->discount;
+                            } else {
+                                $discount = App\Models\Category::where('id', $item['product_category_id'])
+                                    ->get()
+                                    ->first()->discount;
+                            }
+                        @endphp
+                        <tr class="table-body-row">
+                          
+                            <td class="product-image"><img width="200px" height="200px"
+                                    src="{{ asset('images/' . (isset($item->product) ? $item->product->product_image : $item['image1'])) }}"
+                                    alt=""></td>
+                            <td class="product-name">
+                                {{ isset($item->product) ? $item->product->product_name : $item['Name'] }}</td>
+                            <td class="product-price">JOD
+                                {{ isset($item->product) ? $item->product->product_price * $item->quantity * $discount : $item['price'] * $item['quantity'] }}
+                            </td>
+                            
+                                 <td class="product-quantity">
+                                    {{ $item->quantity }}
+                                </td>
+                          
+                            </td>
+
+                        </tr>
+                    @endforeach
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
 
 
-    <div class="checkout-section mt-150 mb-150">
+
+    <div style="margin-left: 70px" class="checkout-section mt-150 mb-150">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
@@ -218,13 +157,18 @@
                                 </tr>
                             </tbody>
                         </table><br>
+                       
+                        <div style="display: grid; grid-template-columns: auto auto;">
+                        
 
-                        <div>
-
-                            <p style="font-weight: bold;"><input type="checkbox"> Cash on Delivery</p>
-                            <br>
-                            <a href="{{ route('checkout', ['total_price' => $total_price]) }}" class="boxed-btn">Place
-                                Order</a>
+                           
+                            <a style="font-weight: bold; width:90% ;margin-top:5px" href="{{ route('checkout', ['total_price' => $total_price]) }}" class="boxed-btn">Cash on Delivery</a>
+                            <form action="{{route('processTransaction')}}" method="post">
+                                @csrf 
+                                <input type="text" name='user_id' value="{{Auth::user()->id}} " hidden>
+                                                    <input type="number" name='price' value="{{$total_price}}" hidden>
+                                                    <input type="submit" value="Paypal">
+                                                    </form>
                         </div>
                     </div>
                 </div>

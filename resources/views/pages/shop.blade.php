@@ -68,10 +68,10 @@
                                     <h3>{{ $item->product_name }}</h3>
                                     <p class="product-price">
                                         <span style="text-decoration: line-through; color: rgba(255, 0, 0, 0.763); font-size: 35px; display: inline-block; margin-bottom:5px;">{{ $item->product_price }}JOD</span>
-                                      <span style="font-size: 25px">{{ $item->product_price - ($item->product_price * $dis / 100) }}JOD</span>
+                                      <span style="font-size: 25px">{{ $item->product_price - ($item->product_price * $discount / 100) }}JOD</span>
         
                                         <span style="margin-left: 20px;  position: relative;
-                                        bottom: 400px; right:15px" class="discount-circle">{{$dis}}%</span>
+                                        bottom: 400px; right:15px" class="discount-circle">{{$discount}}%</span>
                                     </p>
                                     
                                     

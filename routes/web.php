@@ -20,7 +20,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\ContactusController;
 use App\Http\Controllers\CheckoutController;
-
+use App\Http\Controllers\PayPalController;
 
 
 
@@ -98,3 +98,11 @@ Route::patch('/updatecart/{id}', [CartController::class, 'update'])->name('updat
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('showcheckout')->middleware('auth','verified');
 Route::get('/checkout/create/{total_price}', [CheckoutController::class, 'store'])->name('checkout');
 
+
+
+
+
+// paypal route
+Route::post('process-transaction', [PayPalController::class, 'payment'])->name('processTransaction');
+Route::get('success/{user_id}', [PayPalController::class, 'success'])->name('success');
+Route::get('cancel', [PayPalController::class, 'cancel'])->name('cancel');

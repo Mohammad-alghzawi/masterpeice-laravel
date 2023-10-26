@@ -23,50 +23,41 @@ class ShopController extends Controller
     {
         $vendors = Vendor::all();
         $products = Product::where('category_id', $id)->paginate(6);
-        // dd($id);
-        $discount = Category::where('id', $id)->get();
-        $dis = (($discount[0]->discount));
-        $productdetail = Product::find($id);
+        $category = Category::find($id);
+        $discount = $category->discount;
+        // $productdetail = Product::where('category_id',$id)->get();
         // dd($productdetail);
 
-        $prices = $productdetail->product_price;
+        // $prices = $productdetail->product_price;
         // dd($prices);
-        $price = $prices * $dis;
+        // $price = $prices * $dis;
         // dd($discount[0]->discount);
-        $dis = (($discount[0]->discount) * 100);
+        // $dis = (($discount[0]->discount) * 100);
 
-        return view('pages.shop', compact('vendors', 'products', 'dis', 'price'));
+        return view('pages.shop', compact('vendors', 'products', 'discount'));
 
     }
     public function singleproduct($id)
     {
 
         $vendors = Vendor::all();
-        $cat_id = Product::find($id);
 
-        $discount = Category::where('id', $cat_id->category_id)->get();
-        // dd($discount);
-        $dis = (($discount[0]->discount));
-        //    dd($dis);
+        $product = Product::find($id);
 
-        $productdetail = Product::find($id);
-        // dd($productdetail);
+        // dd($product);
 
-        $prices = $productdetail->product_price;
-        // dd($prices);
-        $price = $prices * $dis;
+        $category = Category::find($product->category_id);
 
-        // dd('$dis',$dis,'$price',$price);
-        $productdetails = collect([$productdetail]);
-        $relatedProducts = Product::where('category_id', $productdetail->category_id)
+        $discount = $category->discount;
+
+        $productdetails = collect([$product]);
+        $relatedProducts = Product::where('category_id', $product->category_id)
             ->where('id', '<>', $id)
             ->inRandomOrder()
             ->take(3)
             ->get();
             $category=Category::get();
-           
-
-        return view('pages.single', compact('productdetails', 'relatedProducts', 'vendors', 'price','category'));
+        return view('pages.single', compact('product', 'relatedProducts', 'vendors', 'discount','category'));
     }
 
 

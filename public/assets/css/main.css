@@ -2666,7 +2666,7 @@ ul.social-link-team li a {
 }
 
 .product-image img {
-  width: 90%;
+  /* width: 90%; */
   border-radius: 5px;
   margin-bottom: 20px;
   height: 200px;
@@ -2812,7 +2812,7 @@ tr.table-head-row th:last-child {
 }
 
 td.product-image img {
-  max-width: 60px;
+  /* max-width: 60px; */
   -webkit-box-shadow: none;
   box-shadow: none;
   margin-bottom: 0;
@@ -3115,9 +3115,12 @@ p {
   text-align: center;
   line-height: 30px;
   margin-left: 10px; /* Adjust the margin as needed */
+
 }
 
 .profilee:hover{
   color: #F28123;
 }
+
+
 /* ....................Mohammed....................................... */
