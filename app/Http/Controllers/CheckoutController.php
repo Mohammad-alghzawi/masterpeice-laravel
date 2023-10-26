@@ -90,6 +90,9 @@ class CheckoutController extends Controller
         foreach ($carts as $cart) {
             $cart->update(['checkout_id' => $checkout->id]);
         }
+        $carts->each(function ($cart) {
+            $cart->delete();
+        });
 
         return redirect()->route('home');
 

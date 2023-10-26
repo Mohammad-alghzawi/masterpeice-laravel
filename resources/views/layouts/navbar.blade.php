@@ -89,6 +89,9 @@
                                 </li> --}}
                                 <li>
                                     @if (Auth::check())
+                                    @php
+                                    $cartCount =App\Models\Cart::where('user_id', Auth::user()->id)->count();
+                                @endphp
                                         <div style="display: flex; align-items: center;">
                                             <a href="{{ route('profile.edit', [Auth::user()]) }}"
                                                 style="margin-right: 10px;"
@@ -101,16 +104,21 @@
                                                     onclick="event.preventDefault(); this.closest('form').submit();"><button
                                                         class="button-nav">Logout</button></a>
                                                 <a class="shopping-cart" href="{{ route('cartt') }}"><i
-                                                        class="fas fa-shopping-cart"></i></a>
+                                                        class="fas fa-shopping-cart"></i><span class="ml-1" style="font-size: 15px; vertical-align: middle;  color:white;">({{ $cartCount }})</span></a>
+                                                        
                                             </form>
                                         </div>
                                     @else
+                                    @php
+                    $cart = session('cart');
+                    $cartCount = is_array($cart) ? count($cart) : 0;
+                @endphp
                                         {{-- <a href="/login" class="nav-item nav-link nav-sticky">Login</a> --}}
                                         <a href="/login"><button class="button-nav">Login</button></a>
                                         <a href="/register"><button class="button-nav">Register</button></a>
                                         {{-- <a href="/register" class="nav-item nav-link nav-sticky">Register</a> --}}
                                         <a class="shopping-cart" href="{{ route('cartt') }}"><i
-                                                class="fas fa-shopping-cart"></i></a>
+                                                class="fas fa-shopping-cart"></i><span class="ml-1" style="font-size: 15px; vertical-align: middle;  color:white;">({{ $cartCount }})</span></a>
                                     @endif
                                 </li>
                             </ul>
