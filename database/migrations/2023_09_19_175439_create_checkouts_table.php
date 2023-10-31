@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('payment_method');
             $table->float('total price');
             $table->date('arrive date');
-            $table->unsignedBigInteger('discount_id');
+            $table->unsignedBigInteger('discount_id')->nullable();
             $table->foreign('discount_id')->references('id')->on('discounts');
               $table->string('address')->required();
               $table->string('zipcode')->required();

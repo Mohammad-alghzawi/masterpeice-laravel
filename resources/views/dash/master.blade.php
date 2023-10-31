@@ -246,8 +246,8 @@
                                        
                                     </li>
                                     <li>
-                                        <button class="{{ request()->is('vendor*') ? 'active' : '' }}" >
-                                            <a href="{{route('vendor.index')}}"style="color: rgb(25, 24, 24) ;">Vendor</a>
+                                        <button class="{{ request()->is('logo') ? 'active' : '' }}" >
+                                            <a href="{{route('logo.index')}}"style="color: rgb(25, 24, 24) ;">Vendor</a>
                                         </button>
                                        
                                     </li>

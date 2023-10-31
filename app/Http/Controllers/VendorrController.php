@@ -52,7 +52,7 @@ class VendorrController extends Controller
 
         $imageVendor->save();
         // return redirect('dash.home', compact('categories'));
-        return redirect()->route('vendor.index')->with('status','Add vendor successfully');
+        return redirect()->route('logo.index')->with('status','Add vendor successfully');
     }
 
     /**
@@ -106,7 +106,7 @@ class VendorrController extends Controller
         $vendor->save();
 
         // Redirect back to the category index or wherever you want
-        return redirect()->route('vendor.index')->with('status','Edit vendor successfully');
+        return redirect()->route('logo.index')->with('status','Edit vendor successfully');
     }
 
     /**
@@ -118,6 +118,6 @@ class VendorrController extends Controller
     public function destroy($id)
     {
         Vendor::destroy($id);
-        return redirect()->route('vendor.index')->with('status','Delete vendor successfully');
+        return redirect()->route('logo.index')->with('status','Delete vendor successfully');
     }
 }

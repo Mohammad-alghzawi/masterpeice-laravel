@@ -36,6 +36,10 @@ class AdminController extends Controller
      */
     public function store(Request $request)
 {
+
+
+
+    
     $admin = new Admin;
 
         $admin->name = $request->name;

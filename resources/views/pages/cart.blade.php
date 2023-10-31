@@ -79,7 +79,7 @@
                                         <td class="product-name">
                                             {{ isset($item->product) ? $item->product->product_name : $item['Name'] }}</td>
                                         <td class="product-price">JOD
-                                            {{ isset($item->product) ? $item->product->product_price * $item->quantity * $discount : $item['price'] * $item['quantity'] }}
+                                            {{ isset($item->product) ? $item->product->product_price * $item->quantity * ($discount/100) : $item['price'] * $item['quantity'] }}
                                         </td>
                                         <td class="product-quantity"><form method="POST"
                                             action="{{ route('updatecart', isset($item->product) ? $item->product->id : $item['id']) }}">

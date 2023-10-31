@@ -14,7 +14,7 @@
            
             <div class="container">
                 <div class="signup-content">
-                    <form method="post" action="{{route('vendor.update',$data->id)}}" enctype="multipart/form-data" id="signup-form" class="signup-form">
+                    <form method="post" action="{{route('logo.update',$data->id)}}" enctype="multipart/form-data" id="signup-form" class="signup-form">
                         @csrf
                         @method('PUT')
                         <h2 class="form-title mb-4" style="color:black; text-align: center; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Edit Vendor</h2>

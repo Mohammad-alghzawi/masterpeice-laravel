@@ -14,7 +14,7 @@
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
-                    <form method="post" action="{{route('vendor.store')}}" enctype="multipart/form-data" id="signup-form" class="signup-form">
+                    <form method="post" action="{{route('logo.store')}}" enctype="multipart/form-data" id="signup-form" class="signup-form">
                         @csrf
                         @method('post')
                         <h2 class="form-title mb-4" style="color:black; text-align: center; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Add vendor</h2>

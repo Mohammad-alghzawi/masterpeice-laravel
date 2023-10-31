@@ -115,7 +115,7 @@
                             <td class="product-name">
                                 {{ isset($item->product) ? $item->product->product_name : $item['Name'] }}</td>
                             <td class="product-price">JOD
-                                {{ isset($item->product) ? $item->product->product_price * $item->quantity * $discount : $item['price'] * $item['quantity'] }}
+                                {{ isset($item->product) ? $item->product->product_price * $item->quantity * ($discount/100) : $item['price'] * $item['quantity'] }}
                             </td>
                             
                                  <td class="product-quantity">
@@ -153,7 +153,7 @@
 
                                 <tr>
                                     <td>Total Price</td>
-                                    <td>{{ $total_price }} JOD</td>
+                                    <td>{{ $total_price/100 }} JOD</td>
                                 </tr>
                             </tbody>
                         </table><br>

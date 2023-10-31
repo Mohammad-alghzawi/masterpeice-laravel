@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('product_name');
             $table->String('product_image');
             $table->float('product_price');
-            $table->string('product_description');
+            $table->text('product_description');
             $table->unsignedBigInteger('product_quantity');
             $table->boolean('product_status');
             $table->unsignedBigInteger('category_id')->index();

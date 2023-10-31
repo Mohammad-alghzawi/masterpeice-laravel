@@ -13,7 +13,7 @@
         <div class="trending_products">
             <div class="vd_title_wrap">
                 <h3>Our Vendors</h3>
-                <a href="{{ route('vendor.create') }}"><button type="button" class="btn custom_btn"><i
+                <a href="{{ route('logo.create') }}"><button type="button" class="btn custom_btn"><i
                             class="far fa-plus"></i> Add
                         Vendors</button></a>
             </div>
@@ -50,13 +50,13 @@
                                     <td>
                                         <ul class="btns_group ul_li">
                                             <li>
-                                                <a href="{{ route('vendor.edit', $vendor->id) }}"><button type="submit"
+                                                <a href="{{ route('logo.edit', $vendor->id) }}"><button type="submit"
                                                         class="bg_green">
                                                         <i class="fas fa-edit"></i>
                                                     </button></a>
                                             </li>
                                             <li>
-                                                <form action="{{ route('vendor.destroy', $vendor->id) }}"
+                                                <form action="{{ route('logo.destroy', $vendor->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')

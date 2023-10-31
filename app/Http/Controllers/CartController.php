@@ -22,7 +22,7 @@ class CartController extends Controller
 
             $cart = Cart::where('user_id', $user->id)->where('checkout_id', '<', 2)->with('product')->get();
             foreach ($cart as $item) {
-                $discount = Category::where('id', $item->product->category_id)->get()->first()->discount;
+                $discount = Category::where('id', $item->product->category_id)->get()->first()->discount/100;
                 $total_price += $item->product->product_price * $item->quantity * $discount;
             }
             // $cartCount = count($cart);

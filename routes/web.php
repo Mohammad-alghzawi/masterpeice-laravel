@@ -66,7 +66,7 @@ Route::resource('/admin',AdminController::class)->middleware('isLoggedIn');
 Route::resource('/dash',DashController::class)->middleware('isLoggedIn');
 Route::resource('/profileAdmin',ProfileDashController::class)->middleware('isLoggedIn');
 // Route::get('/image',[ProfileDashController::class,'image']);
-Route::resource('/vendor',VendorrController::class)->middleware('isLoggedIn');
+Route::resource('/logo',VendorrController::class)->middleware('isLoggedIn');
 Route::resource('/discount',DiscountController::class)->middleware('isLoggedIn');
 // -------logindash--------
 Route::get('/logindash',[LoginDash::class,'login'])->name('logindash')->middleware('alreadyLoggedIn');

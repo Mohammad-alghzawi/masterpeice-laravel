@@ -57,7 +57,7 @@
                                                     @endforeach
                                                 @endforeach
                                             </td>
-                                            <td>{{ $checkout['total price'] }}</td>
+                                            <td>{{ $checkout['total price']/100 }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

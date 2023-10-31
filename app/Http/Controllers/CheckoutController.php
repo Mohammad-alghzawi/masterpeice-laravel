@@ -90,7 +90,11 @@ class CheckoutController extends Controller
         foreach ($carts as $cart) {
             $cart->update(['checkout_id' => $checkout->id]);
         }
+       $deletcart= Cart::all()->where('user_id', $user->id);
+       foreach ($deletcart as $cart) {
+        $cart->delete();
 
+       }
         return redirect()->route('home');
 
     }
