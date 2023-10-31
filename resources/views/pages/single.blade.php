@@ -66,7 +66,7 @@
                                         
                                             <input type="number" name="quantity" value="0" min="1"
                                                 max="{{ $product->product_quantity }}">
-                                            <button type="submit" disabled><i class="fas fa-shopping-cart"></i> Sold
+                                            <button class="button-nav" type="submit" disabled><i class="fas fa-shopping-cart"></i> Sold
                                                 Out</button>
                                         @endif
                                     </form><br><br>
